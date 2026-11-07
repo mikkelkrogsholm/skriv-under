@@ -1,0 +1,6 @@
+# Shared build output outside the checkout; override with CARGO_TARGET_DIR if desired.
+[build]
+target-dir = "../.rust-builds/document-signing"
+
+[cache]
+auto-clean-frequency = "1 day"

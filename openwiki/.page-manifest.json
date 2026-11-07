@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/integrations/mcp.md": {
+      "sourceFingerprint": "sha256:e646126ad38c5c1591c5f964d789ac9401864fd19fcbaa695103d07d9ac445ec",
+      "pageVersion": "sha256:bf257f9880edbc6060ebe6711c3cab47790bbcef9526818afec23ee18d8eef13",
+      "completedBy": "codex",
+      "completedRunId": "9882d78c-71d7-4273-ad1d-6a512378dd16"
+    },
+    "/openwiki/operations/lokal-drift.md": {
+      "pageVersion": "sha256:b4060a61c76fc5e2fa45078c75b5f864893c362f11bc616a40d61722d915e0cf",
+      "completedBy": "codex",
+      "completedRunId": "6fa0c783-05aa-43e6-80f7-540712c285e7",
+      "sourceFingerprint": "sha256:58351d369832a3c798438b7a341150a5967cb95b3c42933fb39387c14fa2fbf2"
+    },
+    "/openwiki/product/signering-og-arkiv.md": {
+      "sourceFingerprint": "sha256:e646126ad38c5c1591c5f964d789ac9401864fd19fcbaa695103d07d9ac445ec",
+      "pageVersion": "sha256:558f061f772f099c3e6e7bde0f9c2e54bbb2457611d48ec347bd6ad7c7b04573",
+      "completedBy": "codex",
+      "completedRunId": "9882d78c-71d7-4273-ad1d-6a512378dd16"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:3a02f492e471a6bd21b04c0e4a2af9a5239dc51e87a19c0b727f0c25699bcc9c",
+      "completedBy": "codex",
+      "completedRunId": "6fa0c783-05aa-43e6-80f7-540712c285e7",
+      "sourceFingerprint": "sha256:58351d369832a3c798438b7a341150a5967cb95b3c42933fb39387c14fa2fbf2"
+    }
+  }
+}

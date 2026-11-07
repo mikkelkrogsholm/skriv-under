@@ -1,0 +1,8 @@
+[Unit]
+Description=Check document-signing Rust build disk budget
+
+[Service]
+Type=oneshot
+# Set this to your checkout directory before installation.
+WorkingDirectory=%h/Projects/document-signing
+ExecStart=/usr/bin/env bash scripts/check-build-cache.sh

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:b4060a61c76fc5e2fa45078c75b5f864893c362f11bc616a40d61722d915e0cf",
+  "claims": [
+    {
+      "id": "claim_8addc60e20d349c8b64ae2141d9ea387",
+      "statement": "configure-admin bevarer administratorkontoens ID og dokumenter, sletter sessioner, tilbagekalder alle MCP-tokens og hindrer igangværende login med gammel adgangskode.",
+      "evidence": [
+        {
+          "resource": "repo://src/main.rs#L88-L157",
+          "version": "repo-lines-v1:sha256:47e655d1f0ab3ab1e13500dabc425d60565454a32307afd96678b3d9c71381ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTgwOWRlZmRkODdkZTEzZjcxMDE2MTNjZTc4MGIyMjg0MzdiMTRhNzNiNTY5MTc5NjNmMTM1N2QyMDkyOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ODdmNjVjMTM1YTJiNDcyY2M5OWFjMjNlYzNiYzAwMWM3MjhhOWQ1NWFiODUwY2VkZjFhODlmMjZlOWNlOTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MDFhYjFkMjEyMTE3Mzc3YjhmYTFmODE4MGJlYzVkZDZmZDEzZGQzYmIxMjI5ODhjNTQxYzEyZWNmYWVlYzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNTA2NzMyNDkwZDhiYjhhOWI4Y2IyMzU0ZjZkZTFjZTQ1MmRmMzNhNmQzYTM2ZTRiNDVjZGM1NDdmYWYxZTAifQ"
+        },
+        {
+          "resource": "repo://src/web.rs#L268-L343",
+          "version": "repo-lines-v1:sha256:1d69ab1733da965065796b62a0dd833d865eeb6c9e9b823504bdf0b1a7da2900:eyJzZWxlY3RlZExpbmVDb3VudCI6NzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4MWIzMjhiM2M1N2FhYWNmMjI0NTcxOWQ3Y2I2MWRjN2JiMzRiYzE2ZTdiOThiMzYyMTIyOTdmYmZmYzM1YjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YTg0ZTUyMDA5NzU4NjcxZmExY2RiYjZlYjAxMjRkMTdjNTU4NWM5ZjAwMGEzMjQ5ZTc1MTIwNzRkMzI5NzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3YWViNWQ2ZjkyNzM5ODI0YmY3YWI1ZjRmMzkwNzc1MWZlYTkyOWM2OTU1MWNkYjYzMzk4NjdiMjIzNTk0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlMzM5Yjk0Mzk4YjE2ZmMxZjBhZTcyNDVjZjcwNmQ1ZjkyOGIzOWZlMDJmNmM3NzM0ZDBjMzliYjA1NmY0OWEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6d32d1951adf457d8ed1ad65f57bfaf1",
+      "statement": "SQLite bruger WAL i DATA_DIR; serveren tager en eksklusiv datamappelås før databasen åbnes eller migreres.",
+      "evidence": [
+        {
+          "resource": "repo://src/db.rs#L30-L55",
+          "version": "repo-lines-v1:sha256:c198ea5e2e4e9eb647e844fad092cc7fb01c652359058938c642fe8d05e6f32b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1YjUzN2RmYWQ5YjNhMDU5MmI1NjRmYTNmM2UwOWI1ODNiYzM4YzQ5ODBmYzRiYWY4MDAzYTQ1M2M4NWMyNzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYyMmYyNTJiNGM3ZTIzODM1N2E3OTkzZmIyM2UxYmM3Y2ZhYWQ3ZmQ2NDAzYzQ1NzYyNTlkNjc5OTlhZTg3MmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyZGIxZmM2NjFiNTkzOGM5ZTJlMjBkZWFiYTVhOGU4MDA0MDMyN2U2MjIzNmJjM2Y1OGQ0NjIwNDM0ODc0ZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3ZjNiOGIwNWE4MGE0YTdkNmY4OTQ4MDRlMWQ5YTZhMTA2ODhlMTQ3OTM3MmM2YmU1M2IxMjBjNTE1MTAyMjYifQ"
+        },
+        {
+          "resource": "repo://src/main.rs#L34-L51",
+          "version": "repo-lines-v1:sha256:9030a795123c2d69ef3391365054af7280a3142f8634c5db21625d158464bded:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg0OGVmYjNhNTJhMjc4N2M4ZjYzZDBiNDYxZDY0NDZhYWFkYmE3MjU1MTM0NTE3OWNlZjJmYmVhNjQ1NzY3ZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM5ZWYzZjMxMDVmODdlMWNhMDcxODFiOGJhMjdkY2FhYTg3ZWU0ZTI0ODkyM2E0MTZkZjA2ZTAyNzlmMjVkM2MiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2NDBmMjJkMTU3NTZjZjMwMTc0MTI4ZTJmMDlhNjQyMTJiMDkzZmU5M2E4YzkxNjA5YTVkMDBiODU1ZTAwMjciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3YmI3MmVhYWRjNWE5NmYyNmU3NmMxYWFlMDVjYWM3NDRjZjExN2Q1MzVmYzBhYTY2ZTU3ZjBjYzUzMmIxMWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b0e229d0cf4949f0b5a88fcec1fe9117",
+      "statement": "Rust 1.99.1 er låst med minimal profil; dev/test har begrænset debuginformation og ingen incremental compilation. Cargo target-dir er som standard ../.rust-builds/document-signing uden for checkoutet.",
+      "evidence": [
+        {
+          "resource": "repo://.cargo/config.toml",
+          "version": "repo-file-v1:sha256:864d5c0ae1844bf8d5dcef922043d7795815d4beeb9730dc1ebc7aed2d9cc5f2"
+        },
+        {
+          "resource": "repo://Cargo.toml#L11-L17",
+          "version": "repo-lines-v1:sha256:79ef2fd6b6f01f92955a9d60cd6d0db410e637d10f1156e782ce9f44c64a0d76:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzVlZmEzMjRhZDkxZjFjYTNkNjAwMjhhNzYwMTcwNGRhMDIzOGMyMDIxYjE3MGNkNGM5ODlmZWMyYTMwYzE5MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTBkNTU3NDYzZWQzNWFhMjhjZjNlZWEzZjQyMDYyNTQ0MWUzNzk4N2RjYTFkY2I5OGNkMzE5YzM0NzMzMWZhNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjU1NmRkMGY3MmI0MzRhMjliNmNjMDU3YzQ0YjNkYjA2NmY1MGNmYmRkZDI0YjY3ZDc4ZDFjM2RhZmE2ZmU4ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDUxMzA5ZWY0NTBjYzVmMDY4YmQ3MmE0MjgwMTExNWNlMzJhYWRhMGIyZGMxNDhiYzBmMGQ2OGUzMmUyYmY1OSJ9"
+        },
+        {
+          "resource": "repo://rust-toolchain.toml",
+          "version": "repo-file-v1:sha256:ca67e66659a82661386e5a08471c913cb8b3f7c7ce37592207d3f513589a41c2"
+        }
+      ]
+    },
+    {
+      "id": "claim_89a1153885a44084954b3770a8591a8b",
+      "statement": "Den valgfrie ugentlige timer kontrollerer 10 GiB mandag klokken 09 uden automatisk sletning. Scriptet følger CARGO_TARGET_DIR eller standardstien og opløser lokale symlinks.",
+      "evidence": [
+        {
+          "resource": "repo://deploy/systemd/document-signing-build-cache.service",
+          "version": "repo-file-v1:sha256:fe4d045d09725d6e5592ce6d81ce680e9ee000c30235d9c1e1265baf1e9aaea3"
+        },
+        {
+          "resource": "repo://deploy/systemd/document-signing-build-cache.timer",
+          "version": "repo-file-v1:sha256:3e60cd4af7beb6aa6187bfc69154d9f973526540750a8077c86942af7ebe5c03"
+        },
+        {
+          "resource": "repo://scripts/check-build-cache.sh",
+          "version": "repo-file-v1:sha256:f7ca755316cc206b47a57238cf856b0dde257bf83e653894dc49bf828e115921"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d6d33e9654b436aa8fca2f21050f51b",
+      "statement": "Appens konfiguration er BASE_URL, BIND og DATA_DIR; ingen SMTP-klient eller mailarbejder startes.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.rs",
+          "version": "repo-file-v1:sha256:e7bc96486ce0aa221d33142ac57baf7829022a4ba125a60c6575cf2144de9f51"
+        },
+        {
+          "resource": "repo://src/main.rs#L159-L193",
+          "version": "repo-lines-v1:sha256:5d1ff55d8194a314e9175f0ac5069c362a0d29fd649a2c43fdd55ebc21d2706d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjMzM0NWQ3Y2IyMjg5NDc4MWRjYjE1NGYyYjA0N2MwNjdkOTU2NzVjMTExM2I2YzU0MWYwYzZkOTAzYWJkODgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwZjM1YTcyMzU2YTEwM2I5OTc5ZTg2ZDI3MDAzMzlkZjBlOTM2YTkxYWFlMTBlNzU4OTA0OGZmYTlkMjc5YzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dc336fb240b24a1a86a2ec3d3f4eb33c",
+      "statement": "Genkopierbare tokens bruger HMAC-SHA-256 og en privat linknøgle; manglende nøgle eller uoverensstemmelse med gemte signerings- og læselinks afviser opstart.",
+      "evidence": [
+        {
+          "resource": "repo://src/links.rs#L10-L96",
+          "version": "repo-lines-v1:sha256:270ee65ed4e88ebea982ddfe6c523653d18ae881ccd58d0d697bd31bbb599b9a:eyJzZWxlY3RlZExpbmVDb3VudCI6ODcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3MTQ1NGI3YTMzODhkOGY0NTRjNGFlYTkwZmVjODZmOGFkODIzMmYwMzVhN2M1ODI4NWFlNzllNzkwNjE3NTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlNTViNzYwOWE2Y2Y0MjIyYmMyZDhlZTg1OTg4M2QwMTVlZTZiNzFhMDcyZTAwODhjMjE4Y2NiZTQ5YmM3YzUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmM2QyY2Q1OWVmODI2M2JiYWNiMWI0MTE2NThkNzM1NzE0ODMzYWEwMTczNDgwNGI5ZTg4ZWJjOGU2OGI4MWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUwZGVlMjcwOWU4YTI0NGVjYWM3NWNhY2MwZDZjZTQzNzczNjNhZjFjNzBhNTFlZmFmM2Y1NzFlMjdjMTE0ODUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb598aa2feb04436b12772561a59130d",
+      "statement": "Migration gør historiske modtager-e-mails valgfrie og deaktiverer gamle mailkøer uden at omskrive signerede PDF'er.",
+      "evidence": [
+        {
+          "resource": "repo://src/db.rs#L54-L96",
+          "version": "repo-lines-v1:sha256:bf88c3c348bfbad0b4a05f1ddbed4bdd376edb340ba03fcf96995aa50f7c0cbd:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkZjY2M2UwODRkNDIxZjFiYTdkNjg1M2E1ZWZmMDI0NTk3ZmU0OTAwNjEyNWE2NjdjZjBkZDU0Zjg3MDBlMjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmYjljNzQ4MjA3MGI0YmQzMTYxZjMwOTU5NDFkNDgyMWVlOGJjMTYzNmEwMzZiYmU3YTIwM2UzODY1MWY5N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0ZWE3MTkzZDg3ZTQ5YWQwMmRhN2I4ZGJhODRmOWI1ZGVlMTAzZTMwOWU5N2MzOTMyNzJlYjE1MzQxOTVkNzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5YWU1ZDg4N2UzNmNjYjA3ODdkOGI5ZjE2MzI1OTVlNjFhNmU4ZGVjZmMyNDM0ODEzMjZmZmUyZGVlZGJiOWYifQ"
+        },
+        {
+          "resource": "repo://tests/workflow.rs#L981-L1057",
+          "version": "repo-lines-v1:sha256:d2d659d7370198eae7ab152b7fffa9e8ade51006aa76edca91aa00ce132ee244:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwODNhZjNiOWQ0ZDMyZjY1MTk1ODhmNDFhMTE0NTNkYzQwMTg0ZGJmNDhjZmQ3OTliOWQ2ZDgyNTc1MmEwY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjOGNhNTMxNDFjYjA0ZDFjMzM3Y2UwODI3MWIwZDU3ZTVjYWQ2MzkyNWM2NjI0MTljOTZhNjFmMzA4YTlhODgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NzJlOTI3NWNiNmEyNGZmYTg5NTJjY2E3N2U2YTRhNWEyYWRlNjNjZWQ0MzUxYzZiYzU4NjBhYWZlNTIyZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a21003c061a44f9c950a3ff671146456",
+      "statement": "MCP bruger BASE_URL/mcp med bearer-adgang; proxy skal bevare Host, Origin skal matche BASE_URL, og tokenoplysninger samt aktivitet gemmes i SQLite.",
+      "evidence": [
+        {
+          "resource": "repo://src/mcp.rs#L105-L168",
+          "version": "repo-lines-v1:sha256:35fd4e5ca9507bb7f79538d6a9eb7a637663f078ff0489cde27e736e48ea5356:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNGMwYmYyODMxODBiYTgwYjgzNjFiZGZiNWQxMWYzOTQ4NDVmODg5NDgyNTc3NjcyOGNkNjhmMGIzN2JmNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjMTI0Nzk4NDQ5NGQ0MTc1ZGI3OGJiZjU5MWEzOTdmNjM0MTIyNDdjODc1YjUwNGJjZGZiZDU3NWRlZjgxMzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVjYjI2ZDk4YzU3NDUwZThjOTM3NGIxYTQ1YmFmYTcyMWE3M2FhYmRkNjc0Y2ExMzFkN2M3ODdkZTkyYTI4YmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJmZDk4M2JmNjI1YTBkNjViMzg1NTI4NTU3ZmQ4Zjc1MTA5ODM2NmQwNjMyYWY0NTk3YmNmMzNmZWEzMDQ1NDgifQ"
+        },
+        {
+          "resource": "repo://src/schema.sql",
+          "version": "repo-file-v1:sha256:b4d5fabb7e3233a99cce4ff42e394d72b627b5bfc1317005970a0926ab595a7c"
+        }
+      ]
+    },
+    {
+      "id": "claim_512bbee2f99546db8c6dabb033904595",
+      "statement": "MCP validerer adgang før body læses; formularer har 64 KiB grænse, PDF-multipart 22 MiB og MCP 30 MiB. Dokumentmetadata forespørges uden PDF-BLOBs.",
+      "evidence": [
+        {
+          "resource": "repo://src/mcp.rs#L209-L235",
+          "version": "repo-lines-v1:sha256:53de7ea332d4512538e3feae45c7b136914b51dbc03a0a28ddfc9248422bfb10:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTg4MTM0MWY0YzViZjJiNDIzZmUyZjA4M2IyYTE2MGQ0MDE1MjFkMmZmYTYzZjI5ZTcyZTllZGYwMWJiOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhM2YyMzA5Y2I5NTljNzExN2IzZmQyYWVjMjI4ZmVlMWIwMGEwMjI0Y2UxOTU2YThjN2M0OTJkZmYwYWRiNTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRlNzAzMWU5ODc5YWU5OThmMGViNzM4MmVlNDkxNDI5MmU1OWFmOGU2YjE1NTkxODI3YWE4ZTVmODIwZjZlYzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU4YjYxMjA1NTA3M2Q2ZjlkOWU5MDVhMDFmZTgzOGNlZWYyMGYzYWZkYzVmNjYzNDI2YWU0OGY3MmVkZDQwZTkifQ"
+        },
+        {
+          "resource": "repo://src/web.rs#L141-L223",
+          "version": "repo-lines-v1:sha256:b011aa326ddacb841e040d519e6376fcf2cc2d7a0dc1e31414ae2d369a8852c8:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEyYmMxNjM5OTM0YzhjNzQ4OWM1NGI1ZTMzZDY2YTI5YWI0OTQ3MmExNjMxYWU3ZTc5YmNmMmU4NmVmY2ViYWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YTBmMGZhMGZjNTNjZTRkNzM5NGFmOGYzYTI5YzhlMzgyZjkwNzM3MDNkOWIyMWQ1YjNjOTY2YjcwZDQ2YTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2MzJmOTE5NDNkNGI2MzIzNDZjODM0MWY3ZmM0MzliN2RiN2I2ODU0YjhlYzNhMjNhOTY4YTQ0YmE5YTFmNzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliYTIwYmFmZjExOTY4MzAxNGZjNzFlYTE0ZjVkMzdkNzhkYTQzMWY5OWU0ZDhlODk0NmI3MTJkNzViZjI3ODQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1812af12e1a04f14bd6ca1d52c8c0693",
+      "statement": "Adgangshændelser samles pr. modtager og type i 60 sekunder med en indekseret forespørgsel; senere besøg registreres fortsat.",
+      "evidence": [
+        {
+          "resource": "repo://src/db.rs#L193-L206",
+          "version": "repo-lines-v1:sha256:932823b176b000e74b1d3f3ba39eca0fb4d648f78e18b64dce7efe0e3d6c5cee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkODQwNDJiY2Q2YmRlMmE0OWRhZTE4MjIyMjMyN2Q3YjU3N2RhMjEyMWI3NzY4ZTU2ODk2ZWYzYzE1N2Y4YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1ZjZmNDY2ZTU5Y2ZjMzA3MDNjNDVmNzJhZjY1ZGU1NGFjMzYzZDM1NGNjMWEzMzMwMzUwYWNkNDUyNDM0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/schema.sql",
+          "version": "repo-file-v1:sha256:b4d5fabb7e3233a99cce4ff42e394d72b627b5bfc1317005970a0926ab595a7c"
+        },
+        {
+          "resource": "repo://tests/workflow.rs#L2001-L2048",
+          "version": "repo-lines-v1:sha256:c6dcb742579dc6c8275c5bcc4852a072803c7f927e6eba5e157da07afa405f4d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlMGYxN2I2MGY5MDAyYzc3ZWUwYmRhNDBmZjhjZjVjODg3OWRjMDQ4NjcwZGE0ZDFjZjlhYjRiZjY4YzRjMzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NzJlOTI3NWNiNmEyNGZmYTg5NTJjY2E3N2U2YTRhNWEyYWRlNjNjZWQ0MzUxYzZiYzU4NjBhYWZlNTIyZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1MmUyYjI1M2MyNjJhMjY1NTU1YTQ0YzBjMDc1NTk4Y2FiMTcwZTk5Yjc3MTUyZjQyOWI0ZTA5Y2RkZDdhMGUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab7c288859cc4a7593cc241a1016a39b",
+      "statement": "CI kører formatering, tests og Clippy på push og pull requests med Rust 1.99.1, read-only adgang og uden AI-kørsler.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml",
+          "version": "repo-file-v1:sha256:a7484d2a44637379baa3adf362237e470463ea87e680571da97224c59712087e"
+        },
+        {
+          "resource": "repo://docs/development.md",
+          "version": "repo-file-v1:sha256:5fe1d8f9c042bb5824a0dbedea481264c6ddecb9d43a2af112a29d77673f59f2"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.9.0",
+    "at": "2026-11-07T11:37:05.584Z"
+  }
+}
