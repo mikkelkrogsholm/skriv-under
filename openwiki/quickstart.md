@@ -5,7 +5,7 @@ description: Skriv Under har én administrator, manuelt delte links, procesoverb
 tags: [quickstart, product, signing, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T19:54:14.556Z
+    at: 2026-11-08T20:04:33.376Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
@@ -27,13 +27,15 @@ sources:
     resource: repo://src/main.rs
   - id: openwiki-source-b95ec25c5cfc0be350df258c
     resource: repo://src/mcp.rs
+  - id: openwiki-source-9333e7ee735be359fa094ef8
+    resource: repo://src/pdf-reader.js
   - id: openwiki-source-efa620b89ed22813d5a01dbf
     resource: repo://src/pdf.rs
   - id: openwiki-source-10dbc7a48ac0283046204658
     resource: repo://src/schema.sql
   - id: openwiki-source-7b75006986d8b0337adc6ca0
     resource: repo://src/web.rs
-generated: { by: "codex", at: "2026-11-08T19:54:14.556Z" }
+generated: { by: "codex", at: "2026-11-08T20:04:33.376Z" }
 ---
 
 # Skriv Under
@@ -61,6 +63,8 @@ Modtagere får ingen konto og kan ikke tilgå dit arkiv eller dine øvrige dokum
 5. Når alle har underskrevet, hentes aftalen i **Signeret arkiv** sammen med kvitteringen og proceshistorikken.
 
 En linkåbning registreres som en åbning og kan komme fra en scanner. Gentagne åbninger og PDF-visninger samles pr. modtager og type i ét minut. Selve underskriften kræver modtagerens aktive bekræftelse. Ved en pakke vises alle originaler med navn, sider og hash, og **Underskriv alle N dokumenter** bekræfter dem samlet. Pakken må højst være 20 MiB og 200 sider i alt. Den færdige PDF får bilaget **Underskrifter og dokumentation** med indtastede navne, signeringsreferencer, præcise tidspunkter, gemte samtykker og hashes for den samlede original og pakkens enkelte dokumenter. Bilaget kan fortsætte over flere sider og hentes separat; der foretages ingen MitID-kontrol eller certifikatbaseret PDF-forsegling.
+
+PDF’erne kan læses direkte på signeringssiden med dokumentvalg, sideskift og zoom, før samtykket gives. Læseren tilpasser sig mobil og desktop og tilbyder også sidens udtrækkelige tekst samt separat PDF-link.
 
 ## Installér og start
 

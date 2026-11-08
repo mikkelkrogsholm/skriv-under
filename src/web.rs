@@ -202,6 +202,53 @@ pub fn router(app: Arc<App>) -> Router {
         .route("/sign/receipt.pdf", get(sign_receipt))
         .route("/d/{token}/{kind}", get(download))
         .route(
+            "/assets/pdfjs/{kind}/{name}",
+            get(|Path((kind, name)): Path<(String, String)>| async move {
+                match crate::pdf_assets::asset(&kind, &name) {
+                    Some(bytes) => (
+                        [(
+                            header::CONTENT_TYPE,
+                            if name.ends_with(".wasm") {
+                                "application/wasm"
+                            } else {
+                                "application/octet-stream"
+                            },
+                        )],
+                        bytes,
+                    )
+                        .into_response(),
+                    None => StatusCode::NOT_FOUND.into_response(),
+                }
+            }),
+        )
+        .route(
+            "/assets/pdf-reader.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("pdf-reader.js"),
+                )
+            }),
+        )
+        .route(
+            "/assets/pdfjs/pdf.mjs",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("../vendor/pdfjs/pdf.mjs"),
+                )
+            }),
+        )
+        .route(
+            "/assets/pdfjs/pdf.worker.mjs",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("../vendor/pdfjs/pdf.worker.mjs"),
+                )
+            }),
+        )
+        .route(
             "/assets/style.css",
             get(|| async {
                 (
@@ -233,7 +280,7 @@ async fn security(req: Request, next: Next) -> Response {
         ("x-frame-options", "SAMEORIGIN"),
         (
             "content-security-policy",
-            "default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self' data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'",
+            "default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; connect-src 'self'; style-src 'self'; img-src 'self' data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'",
         ),
         (
             "permissions-policy",
@@ -824,6 +871,23 @@ async fn open_invitation(State(app): S, Path(token): Path<String>) -> Result<Res
     tx.commit().await?;
     Ok(response)
 }
+fn pdf_reader(files: &[db::SourceFile]) -> String {
+    let mut html = "<section class='panel pdf-reader' id='pdf-reader' aria-label='Læs dokumenterne'><h2>Læs før du underskriver</h2><label for='reader-document'>Dokument</label><select id='reader-document'>".to_string();
+    if files.is_empty() {
+        html.push_str("<option value='/sign/document.pdf'>Dokument til underskrift</option>");
+    } else {
+        for f in files {
+            html.push_str(&format!(
+                "<option value='/sign/document.pdf?source={}'>{}. {}</option>",
+                f.position,
+                f.position,
+                esc(&f.name)
+            ));
+        }
+    }
+    html.push_str("</select><div class='reader-toolbar' role='group' aria-label='PDF-betjening'><button type='button' class='secondary small' data-reader-prev disabled>← Forrige side</button><span data-reader-page>Side –</span><button type='button' class='secondary small' data-reader-next disabled>Næste side →</button><label for='reader-zoom'>Zoom<select id='reader-zoom'><option value='1'>Tilpas bredde</option><option value='1.5'>150 %</option><option value='2'>200 %</option></select></label></div><p class='muted' data-reader-status role='status'>Indlæser PDF …</p><button type='button' class='secondary small' data-reader-retry hidden>Prøv igen</button><div class='reader-canvas' tabindex='0' aria-label='PDF-side. Brug sideskift ovenfor.'><canvas role='img' aria-label='Dokumentside'></canvas></div><details class='reader-text'><summary>Vis sidens tekst</summary><div data-reader-text class='preserve'></div></details><p><a data-reader-download href='/sign/document.pdf' target='_blank' rel='noopener'>Åbn den valgte PDF i en ny fane ↗</a></p><noscript><p>Aktivér JavaScript for at læse PDF’en her, eller åbn PDF-linket ovenfor.</p></noscript></section><script type='module' src='/assets/pdf-reader.js'></script>");
+    html
+}
 async fn sign_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
     db::expire(&app.pool).await?;
     let (r, d, secret) = signer(&app, &h).await?;
@@ -848,7 +912,8 @@ async fn sign_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
     } else if d.status != "pending" {
         body.push_str("<section class='panel'><h2>Signeringsrunden er lukket</h2><p>Du kan ikke længere underskrive. Kontakt afsenderen for en ny invitation.</p></section>");
     } else {
-        body.push_str(&format!("<section class='panel'><p class='preserve'>{}</p><p class='muted'>Underskriver: {} · Frist: {}</p><a href='/sign/document.pdf' target='_blank' rel='noopener'>Åbn PDF i en ny fane ↗</a></section><iframe class='pdf-view' title='Dokument til underskrift' src='/sign/document.pdf'></iframe>",esc(&d.message),esc(&r.name),db::date(d.expires_at)));
+        body.push_str(&format!("<section class='panel'><p class='preserve'>{}</p><p class='muted'>Underskriver: {} · Frist: {}</p><a href='/sign/document.pdf' target='_blank' rel='noopener'>Åbn PDF i en ny fane ↗</a></section>",esc(&d.message),esc(&r.name),db::date(d.expires_at)));
+        body.push_str(&pdf_reader(&files));
         if r.status == "signed" {
             body.push_str("<section class='panel success'><h2>Din underskrift er registreret.</h2><p>Vi afventer de øvrige underskrivere. Brug dit personlige link igen for at hente den færdige aftale, når alle har underskrevet.</p></section>");
         } else {

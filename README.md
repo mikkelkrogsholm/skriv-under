@@ -15,6 +15,7 @@ Se [produktionsvejledningen](docs/production.md) for installation, backup og gen
 - Dokumentpakker med 1–10 PDF’er, én samlet underskrift og ét link pr. person.
 - 1–20 underskrivere og frist på 7, 14 eller 30 dage.
 - Personlige signeringslinks uden e-mailafsendelse eller modtagerkonti.
+- Indbygget PDF-læser med dokumentvalg, sideskift, zoom og sidens tekst.
 - Procesoverblik med underskrifter, afventende personer og registrerede hændelser.
 - Afvisning, annullering og udskiftning af afventendes links.
 - Signeret arkiv med søgning og adgang til færdige aftaler efter afslutning.

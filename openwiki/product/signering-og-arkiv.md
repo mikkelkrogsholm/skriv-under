@@ -5,7 +5,7 @@ description: Skriv Unders adgangsmodel, manuelt delte signeringslinks, procesove
 tags: [signing, access-control, tokens, workflow, archive, audit]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T19:54:14.556Z
+    at: 2026-11-08T20:04:33.376Z
 sources:
   - id: openwiki-source-abe5fae4c5d81d8288df4316
     resource: repo://examples/receipt_preview.rs
@@ -17,6 +17,8 @@ sources:
     resource: repo://src/links.rs
   - id: openwiki-source-b95ec25c5cfc0be350df258c
     resource: repo://src/mcp.rs
+  - id: openwiki-source-9333e7ee735be359fa094ef8
+    resource: repo://src/pdf-reader.js
   - id: openwiki-source-efa620b89ed22813d5a01dbf
     resource: repo://src/pdf.rs
   - id: openwiki-source-ed3a7abb0422ee495e36f6ad
@@ -27,7 +29,9 @@ sources:
     resource: repo://src/web.rs
   - id: openwiki-source-a4d0d6fea18ea7627c71affd
     resource: repo://tests/workflow.rs
-generated: { by: "codex", at: "2026-11-08T19:54:14.556Z" }
+  - id: openwiki-source-30ac601c64da3235a140715c
+    resource: repo://vendor/pdfjs/README.md
+generated: { by: "codex", at: "2026-11-08T20:04:33.376Z" }
 ---
 
 # Adgang, signeringsforløb og arkiv
@@ -66,6 +70,12 @@ Originale PDF-bytes og deres SHA-256-hash gemmes for hver fil i `document_files`
 Modtageren ser pakkens dokumenter i rækkefølge med filnavne, sidetal og SHA-256 og kan åbne hver uændret original. Ét personligt link gælder hele pakken. Modtageren indtaster sit navn og accepterer den viste samtykketekst for alle dokumenter med **Underskriv alle N dokumenter**, før POST-handlingen kan registrere underskriften. CSRF, dokumentstatus, udløb, token og tidligere svar kontrolleres. Opdateringen og revisionshændelsen sker i én transaktion. En allerede besvaret invitation kan ikke underskrive igen.
 
 **Erstat links til afventende** roterer tokens for ubesvarede invitationer og gør deres tidligere links ugyldige. Allerede registrerede underskrifter bevares. Der skal gå mindst 60 sekunder mellem linkudskiftninger. Links kan kopieres igen fra administratorens dokumentside, også efter genstart. Afvisning med begrundelse og annullering lukker runden; udløb kontrolleres både ved indsendelse og i vedligeholdelsesarbejderen.
+
+## Læs PDF’er før underskrift
+
+Signeringssiden har en indbygget læser med valg mellem pakkens originaler, forrige/næste side, sidetal og zoom. Den viser én side ad gangen og tilpasser bredden til skærmen. Navn og samtykkefelt bevares, mens der skiftes dokument eller side. **Vis sidens tekst** giver adgang til udtrækkelig tekst; billedscannede sider har ikke nødvendigvis tekst.
+
+Læseren bruger lokalt leveret PDF.js og en lokal worker med fonte, CMaps og WebAssembly-understøttelse. PDF’en hentes med samme dokumentbundne cookie som før; ingen filer sendes til en ekstern fremviser. JavaScript i PDF’er evalueres ikke. Fejl giver en forklaring, **Prøv igen** og et link til at åbne PDF’en separat. PDF-læsning giver fortsat ikke automatisk samtykke og beviser ikke, at personen har læst dokumentet.
 
 ## Følg processen
 

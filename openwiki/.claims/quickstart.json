@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:821bddacf65be25140acd76ad533ad4e4056b6cb5e84edc20e144c1ba85d2556",
+  "pageVersion": "sha256:43564db7697f8ab5bbc5d1082864fa94b09fb2866a294ab192acb132caea7268",
   "claims": [
     {
       "id": "claim_7a8ed888aa024539b4c3b6cac9c84430",
@@ -12,7 +12,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     },
@@ -30,7 +30,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     },
@@ -62,7 +62,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     },
@@ -118,7 +118,7 @@
         },
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:26d78955e78da631135ee9afcde66b229e9c5f2e7c23d7d4134490dec3cf387f"
+          "version": "repo-file-v1:sha256:8748ef071179c153b3d594c8a745ddfc90a3e6710b7bdeb125edcbc6fe0a9ac3"
         },
         {
           "resource": "repo://rust-toolchain.toml",
@@ -154,13 +154,27 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+        }
+      ]
+    },
+    {
+      "id": "claim_6984930b54574a9da62fcf8b1b68a9f5",
+      "statement": "PDF’er kan læses direkte på signeringssiden før samtykke med dokumentvalg, sideskift, zoom og udtrækkelig sidetekst.",
+      "evidence": [
+        {
+          "resource": "repo://src/pdf-reader.js",
+          "version": "repo-file-v1:sha256:d42d47623930a17591892bf61067eeb9251852deb91d148053e765fa62d584ce"
+        },
+        {
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T19:54:14.556Z"
+    "at": "2026-11-08T20:04:33.376Z"
   }
 }

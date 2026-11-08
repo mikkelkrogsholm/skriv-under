@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a4446f1fe2d573745421325780315d6f0008a3722d8514d6af21cce7446144b6",
+  "pageVersion": "sha256:26b41c08b24ad07a9ed4e7e85b17c263906e3ddef4c08ab523c89d5c558891d2",
   "claims": [
     {
       "id": "claim_eacf2b06a0674f029e062b3c2938c379",
@@ -16,7 +16,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     },
@@ -34,7 +34,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         }
       ]
     },
@@ -108,7 +108,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         },
         {
           "resource": "repo://tests/workflow.rs",
@@ -121,16 +121,16 @@
       "statement": "Almindelige formularer har 64 KiB request-grænse, multipart-PDF 22 MiB og MCP 30 MiB, mens selve PDF-filen fortsat højst er 20 MiB.",
       "evidence": [
         {
-          "resource": "repo://src/pdf.rs#L8-L11",
-          "version": "repo-lines-v1:sha256:278e6d4b2aaa482f33db5df484a4c40939eaa777f461925137ee7c217f97319b:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGEwMzFhODA4OTJkMDQxOGMzNTg3ZWU0MjgwNmM3YTFkODE1OWVjNGI2MjdkM2I0OTUwOTgxMDY2YzgzM2Q2NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGIwZjBkNTc0ZTcxOWZhODZjNmJlOTFkMGQ4YjYxYmViMmE0ZmMxNDYxYmYxMGNiNGVkMjExMzRlYmI0NTAxNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTJmMDIzYTJlZDgxM2ZmNTMwOGJhNzE4MjA5MzllYzZlNDgyOGVjNzIxMTRmNGNjZjE0Mzg2NDEwNjQ0MjY2NCJ9"
+          "resource": "repo://src/pdf.rs",
+          "version": "repo-file-v1:sha256:cadc591d2f4a7913cf2b82a92b0728091ce87b2498f2ff999ac6506aab897046"
         },
         {
-          "resource": "repo://src/web.rs#L172-L224",
-          "version": "repo-lines-v1:sha256:47e8e59c79737b807627c129abf9e3958d7466f92985937cd6870dc9cd699d10:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI2NWY0Y2RhYmZhY2FmNDA2YTc3MmNiMTIxNjM0YTVmMmIwMWQ3YjRkMTk1ZmRiOGVjODRjOGY1YWZjMmQxMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YTBmMGZhMGZjNTNjZTRkNzM5NGFmOGYzYTI5YzhlMzgyZjkwNzM3MDNkOWIyMWQ1YjNjOTY2YjcwZDQ2YTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3ZTdmNzdiZTdhZTI3ODhiYTc5MDNiMjExZWViZmY5MDY4NWE0Njk0NmYxYjcwMGUxYjIzNDZlNDM0MTQ2YjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliYTIwYmFmZjExOTY4MzAxNGZjNzFlYTE0ZjVkMzdkNzhkYTQzMWY5OWU0ZDhlODk0NmI3MTJkNzViZjI3ODQifQ"
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
         },
         {
-          "resource": "repo://tests/workflow.rs#L2156-L2217",
-          "version": "repo-lines-v1:sha256:3ef6d03063a9693f2941c6de970ecf9ab0b2584b69c90566bd3be56d6ad99344:eyJzZWxlY3RlZExpbmVDb3VudCI6NjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE1NWI2N2NkNTUzMzMwMWEyZDg4NmIzZTZlY2E5OGI2NmE1YjFhNTUwNzlmODBhZjg4ZTkzYjE2NmU0YjZmMWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NzJlOTI3NWNiNmEyNGZmYTg5NTJjY2E3N2U2YTRhNWEyYWRlNjNjZWQ0MzUxYzZiYzU4NjBhYWZlNTIyZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMDMwYjc2YzBmNTk5OWMxNjNmMjQ3Y2Q4NTMwZjg4NTVjNTJiNDNkMjAxZDI5Mjk4NGU1NmI0MGZiOTVhY2YifQ"
+          "resource": "repo://tests/workflow.rs",
+          "version": "repo-file-v1:sha256:7851cf840b8f86728ad9b0901aa51d6b77d19b8db35cde6aca7545512e02e676"
         }
       ]
     },
@@ -155,6 +155,6 @@
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T19:54:14.556Z"
+    "at": "2026-11-08T20:04:33.376Z"
   }
 }
