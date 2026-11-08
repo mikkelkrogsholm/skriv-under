@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:898fddb63d4bfbd6dae348c8f038ec82d2c6cc091b7e0691e328d3f77d344496",
+  "pageVersion": "sha256:b461b1783dec7f5f609f763d6712bf6222cc88e15078958a0215377a252d4854",
   "claims": [
     {
       "id": "claim_22ca9de739534f29a56285534c46d921",
@@ -16,7 +16,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -29,7 +29,7 @@
           "version": "repo-lines-v1:sha256:932823b176b000e74b1d3f3ba39eca0fb4d648f78e18b64dce7efe0e3d6c5cee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkODQwNDJiY2Q2YmRlMmE0OWRhZTE4MjIyMjMyN2Q3YjU3N2RhMjEyMWI3NzY4ZTU2ODk2ZWYzYzE1N2Y4YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1ZjZmNDY2ZTU5Y2ZjMzA3MDNjNDVmNzJhZjY1ZGU1NGFjMzYzZDM1NGNjMWEzMzMwMzUwYWNkNDUyNDM0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/web.rs#L884-L910",
+          "resource": "repo://src/web.rs#L885-L911",
           "version": "repo-lines-v1:sha256:a14b4b0f16b2b8b13ed9130e5272eba8c74a224e297d7cc89f4165a047d60c5f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjODFhOTVlODFjZWQ3MWY5ODI5ZGIxZDljYmJiN2JlNTNmNzUwOGM1MmZiOTViYjg3ODk4MjZkM2MyYjI4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkY2JlNjg1MDMzZGNhOWY3NzBmMmM1OTRlYjRiZGNlNGJjN2RmNjQzZmZiZjRmZjFmNWQyMGU4MjI4ZjFhYjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3N2UzMTBlMTE5ZTJmMDM3ZTRkNTFlZWNmOTg3ODI2ZjNjZWY0ZTcwODZjMjIyYjkyMmVlMDVjZTFlNGViMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzYmI4YzE0ZjA0NTdhY2U4NzkyZDAxYzBmZDBhODZjYjAyM2E0ZDFkYjE3ZTliMmM3MmM2NGU2ZGZjZTYwZWMifQ"
         }
       ]
@@ -54,7 +54,7 @@
       "evidence": [
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -68,7 +68,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -114,7 +114,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -132,7 +132,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -174,7 +174,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -196,7 +196,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         },
         {
           "resource": "repo://tests/workflow.rs",
@@ -210,21 +210,35 @@
       "evidence": [
         {
           "resource": "repo://src/pdf-reader.js",
-          "version": "repo-file-v1:sha256:d42d47623930a17591892bf61067eeb9251852deb91d148053e765fa62d584ce"
+          "version": "repo-file-v1:sha256:f2d3d3714affcf4540c98622de25f4cfff8489caefd0d006fd68cd19c7871379"
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         },
         {
           "resource": "repo://vendor/pdfjs/README.md",
           "version": "repo-file-v1:sha256:2e4c40ba8bc7096c39611b07cd7cc9f66aabe67ad923770b3263a9715cae9a2f"
         }
       ]
+    },
+    {
+      "id": "claim_5a0f849da05a4358a66e21ea0e3cec1e",
+      "statement": "Uploadsiden viser valgte lokale PDF-filer i samme læser før Gem kladde. Filerne læses som ArrayBuffer i browseren med dokumentvalg, sideskift og zoom; udskiftning eller rydning af filvalget opdaterer forhåndsvisningen uden at gemme en kladde.",
+      "evidence": [
+        {
+          "resource": "repo://src/pdf-reader.js",
+          "version": "repo-file-v1:sha256:f2d3d3714affcf4540c98622de25f4cfff8489caefd0d006fd68cd19c7871379"
+        },
+        {
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:18:44.043Z"
+    "at": "2026-11-08T20:25:05.177Z"
   }
 }

@@ -666,8 +666,9 @@ fn package_manifest(files: &[db::SourceFile], base: &str) -> String {
 async fn new_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
     let (_, secret) = auth(&app, &h).await?;
     let body = format!(
-        "<a class='back' href='/'>← Alle dokumenter</a><div class='heading'><div><span class='eyebrow'>NY SIGNERINGSRUNDE</span><h1>En aftale. Alle dokumenterne.</h1><p class='muted'>Saml dokumenterne, tilføj underskriverne, og gennemse pakken før du deler links.</p></div></div><form class='panel editor' method='post' action='/documents' enctype='multipart/form-data'>{}<div class='form-step'><span>1</span><div><h2>Dokumentpakken</h2><p>Ét personligt link. Én samlet underskrift.</p></div></div><label>Titel<input name='title' required maxlength='150' placeholder='Fx Samarbejdsaftale'></label><label for='package-pdfs'>PDF-dokumenter</label><div class='upload-area'><strong>Vælg dokumenterne til din aftale</strong><p>Fx hovedaftale, vilkår og bilag. Alle underskrives samlet.</p><input id='package-pdfs' type='file' name='pdf' accept='application/pdf,.pdf' multiple required aria-describedby='upload-help'><small id='upload-help'>1–10 PDF-filer. Tilsammen højst 20 MiB og 200 sider, uden adgangskode eller aktivt indhold.</small><ol class='upload-list' data-upload-list aria-live='polite'></ol></div><label>Besked på signeringssiden<textarea name='message' maxlength='4000' rows='3' placeholder='En kort besked om dokumentet'></textarea></label><hr><div class='form-step'><span>2</span><div><h2>Hvem skal underskrive?</h2><p>Hver person får ét link til hele pakken.</p></div></div><label>Underskrivernes navne — én person pr. linje<textarea name='recipients' required maxlength='10000' rows='4' placeholder='Anna Jensen&#10;Bo Hansen'></textarea><small>Højst 20 personer. Du får ét personligt link pr. person og deler selv linkene.</small></label><label>Frist efter oprettelse af links<select name='days'><option value='7'>7 dage</option><option value='14' selected>14 dage</option><option value='30'>30 dage</option></select></label><div class='form-actions'><a href='/'>Annullér</a><button>Gem kladde →</button></div></form>",
-        csrf_field(&secret)
+        "<a class='back' href='/'>← Alle dokumenter</a><div class='heading'><div><span class='eyebrow'>NY SIGNERINGSRUNDE</span><h1>En aftale. Alle dokumenterne.</h1><p class='muted'>Saml dokumenterne, tilføj underskriverne, og gennemse pakken før du deler links.</p></div></div><form class='panel editor' method='post' action='/documents' enctype='multipart/form-data'>{}<div class='form-step'><span>1</span><div><h2>Dokumentpakken</h2><p>Ét personligt link. Én samlet underskrift.</p></div></div><label>Titel<input name='title' required maxlength='150' placeholder='Fx Samarbejdsaftale'></label><label for='package-pdfs'>PDF-dokumenter</label><div class='upload-area'><strong>Vælg dokumenterne til din aftale</strong><p>Fx hovedaftale, vilkår og bilag. Alle underskrives samlet.</p><input id='package-pdfs' type='file' name='pdf' accept='application/pdf,.pdf' multiple required aria-describedby='upload-help'><small id='upload-help'>1–10 PDF-filer. Tilsammen højst 20 MiB og 200 sider, uden adgangskode eller aktivt indhold.</small><ol class='upload-list' data-upload-list aria-live='polite'></ol></div>{}<label>Besked på signeringssiden<textarea name='message' maxlength='4000' rows='3' placeholder='En kort besked om dokumentet'></textarea></label><hr><div class='form-step'><span>2</span><div><h2>Hvem skal underskrive?</h2><p>Hver person får ét link til hele pakken.</p></div></div><label>Underskrivernes navne — én person pr. linje<textarea name='recipients' required maxlength='10000' rows='4' placeholder='Anna Jensen&#10;Bo Hansen'></textarea><small>Højst 20 personer. Du får ét personligt link pr. person og deler selv linkene.</small></label><label>Frist efter oprettelse af links<select name='days'><option value='7'>7 dage</option><option value='14' selected>14 dage</option><option value='30'>30 dage</option></select></label><div class='form-actions'><a href='/'>Annullér</a><button>Gem kladde →</button></div></form>",
+        csrf_field(&secret),
+        pdf_reader(&[], true)
     );
     Ok(Html(page("Nyt dokument", &body, Some(&secret))))
 }
@@ -909,9 +910,26 @@ async fn open_invitation(State(app): S, Path(token): Path<String>) -> Result<Res
     tx.commit().await?;
     Ok(response)
 }
-fn pdf_reader(files: &[db::SourceFile]) -> String {
-    let mut html = "<section class='panel pdf-reader' id='pdf-reader' aria-label='Læs dokumenterne'><h2>Læs før du underskriver</h2><label for='reader-document'>Dokument</label><select id='reader-document'>".to_string();
-    if files.is_empty() {
+fn pdf_reader(files: &[db::SourceFile], local: bool) -> String {
+    let heading = if local {
+        "Gennemse de valgte PDF’er"
+    } else {
+        "Læs før du underskriver"
+    };
+    let attributes = if local {
+        "data-local-files='package-pdfs' hidden"
+    } else {
+        ""
+    };
+    let note = if local {
+        "<p class='muted'>Gennemgå dokumenterne her, før du gemmer kladden.</p>"
+    } else {
+        ""
+    };
+    let mut html = format!(
+        "<section class='panel pdf-reader' id='pdf-reader' aria-label='Læs dokumenterne' {attributes}><h2>{heading}</h2>{note}<label for='reader-document'>Dokument</label><select id='reader-document'>"
+    );
+    if files.is_empty() && !local {
         html.push_str("<option value='/sign/document.pdf'>Dokument til underskrift</option>");
     } else {
         for f in files {
@@ -951,7 +969,7 @@ async fn sign_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
         body.push_str("<section class='panel'><h2>Signeringsrunden er lukket</h2><p>Du kan ikke længere underskrive. Kontakt afsenderen for en ny invitation.</p></section>");
     } else {
         body.push_str(&format!("<section class='panel'><p class='preserve'>{}</p><p class='muted'>Underskriver: {} · Frist: {}</p><a href='/sign/document.pdf' target='_blank' rel='noopener'>Åbn PDF i en ny fane ↗</a></section>",esc(&d.message),esc(&r.name),db::date(d.expires_at)));
-        body.push_str(&pdf_reader(&files));
+        body.push_str(&pdf_reader(&files, false));
         if r.status == "signed" {
             body.push_str("<section class='panel success'><h2>Din underskrift er registreret.</h2><p>Vi afventer de øvrige underskrivere. Brug dit personlige link igen for at hente den færdige aftale, når alle har underskrevet.</p></section>");
         } else {

@@ -1,5 +1,7 @@
 const reader = document.querySelector('.pdf-reader');
 if (reader) {
+  const upload = reader.dataset.localFiles ? document.getElementById(reader.dataset.localFiles) : null;
+  let localFiles = [], objectUrls = [];
   const status = reader.querySelector('[data-reader-status]');
   const files = reader.querySelector('#reader-document');
   const canvas = reader.querySelector('canvas');
@@ -38,7 +40,7 @@ if (reader) {
       const page = await pdf.getPage(pageNumber);
       if (current !== generation) return;
       const natural = page.getViewport({ scale: 1 });
-      const width = Math.max(200, viewport.clientWidth - 24);
+      const width = Math.max(100, viewport.clientWidth - 24);
       const scale = Math.min(width / natural.width, 2) * Number(zoom.value);
       const view = page.getViewport({ scale });
       // Bound pixel memory even for unusually tall pages and high-density displays.
@@ -71,7 +73,7 @@ if (reader) {
     text.textContent = '';
     retry.hidden = true;
     status.textContent = 'Indlæser PDF …';
-    download.href = files.value;
+    download.href = upload ? objectUrls[Number(files.value)] : files.value;
     pdf = null;
     const old = loading;
     loading = null;
@@ -80,7 +82,11 @@ if (reader) {
       const { getDocument, GlobalWorkerOptions } = await import('/assets/pdfjs/pdf.mjs');
       if (current !== generation) return;
       GlobalWorkerOptions.workerSrc = '/assets/pdfjs/pdf.worker.mjs';
-      const task = getDocument({ url: files.value, withCredentials: true,
+      const source = upload
+        ? { data: new Uint8Array(await localFiles[Number(files.value)].arrayBuffer()) }
+        : { url: files.value, withCredentials: true };
+      if (current !== generation) return;
+      const task = getDocument({ ...source,
         isEvalSupported: false, enableXfa: false,
         cMapUrl: '/assets/pdfjs/cmaps/', cMapPacked: true,
         standardFontDataUrl: '/assets/pdfjs/standard_fonts/', wasmUrl: '/assets/pdfjs/wasm/' });
@@ -104,5 +110,39 @@ if (reader) {
     readerWidth = viewport.clientWidth;
     clearTimeout(resizeTimer); resizeTimer = setTimeout(draw, 150);
   }).observe(viewport);
-  open();
+  function releaseUrls() {
+    objectUrls.forEach(url => URL.revokeObjectURL(url));
+    objectUrls = [];
+  }
+  function selectedFiles() {
+    // Changing the file input invalidates any previous render before its bytes finish loading.
+    ++generation;
+    render?.cancel();
+    pdf = null;
+    const old = loading;
+    loading = null;
+    old?.destroy().catch(() => {});
+    releaseUrls();
+    localFiles = Array.from(upload.files);
+    files.replaceChildren();
+    canvas.hidden = true;
+    text.textContent = '';
+    reader.hidden = !localFiles.length || localFiles.length > 10 || localFiles.reduce((size, file) => size + file.size, 0) > 20 * 1024 * 1024;
+    if (reader.hidden) return;
+    localFiles.forEach((file, index) => {
+      objectUrls.push(URL.createObjectURL(new Blob([file], { type: 'application/pdf' })));
+      const option = document.createElement('option');
+      option.value = String(index);
+      option.textContent = `${index + 1}. ${file.name}`;
+      files.append(option);
+    });
+    open();
+  }
+  if (upload) {
+    upload.addEventListener('change', selectedFiles);
+    window.addEventListener('pagehide', event => { if (!event.persisted) releaseUrls(); });
+    selectedFiles();
+  } else {
+    open();
+  }
 }

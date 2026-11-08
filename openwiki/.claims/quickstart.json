@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a62ca2898d29f2666ccde83ddd3c5ec9803bc193535306e7a1991be030a34943",
+  "pageVersion": "sha256:848766e6dbba3a597c7825f0e982179a5058ddc73026b11652d2611f59818b2f",
   "claims": [
     {
       "id": "claim_7a8ed888aa024539b4c3b6cac9c84430",
@@ -12,7 +12,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -30,7 +30,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -62,7 +62,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -118,7 +118,7 @@
         },
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:3bcfc47344317d9fbd1c8bf89ba968c44069285f56202806d45d09266d1b9a18"
+          "version": "repo-file-v1:sha256:c48415a8f1d3b3a9a5ae09fcf02bdbc1f0a9ac5e29d805ed20423cd1dfe78450"
         },
         {
           "resource": "repo://rust-toolchain.toml",
@@ -154,7 +154,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -164,11 +164,11 @@
       "evidence": [
         {
           "resource": "repo://src/pdf-reader.js",
-          "version": "repo-file-v1:sha256:d42d47623930a17591892bf61067eeb9251852deb91d148053e765fa62d584ce"
+          "version": "repo-file-v1:sha256:f2d3d3714affcf4540c98622de25f4cfff8489caefd0d006fd68cd19c7871379"
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -178,7 +178,7 @@
       "evidence": [
         {
           "resource": "repo://src/style.css",
-          "version": "repo-file-v1:sha256:510bd8a42e94d6d08170602e36d27d0b45cf6cfb1ae9a06a5d8f7d3fc72edb98"
+          "version": "repo-file-v1:sha256:68d72772577f903de6725b47debe50d4e70921757991c779e6bc2ed273f5e318"
         },
         {
           "resource": "repo://src/theme.js",
@@ -186,7 +186,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     },
@@ -200,13 +200,27 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
+        }
+      ]
+    },
+    {
+      "id": "claim_d5c1b99092a94959bfc704c4cfbb1b63",
+      "statement": "Uploadsiden viser valgte lokale PDF-filer i samme læser før Gem kladde. Filerne læses som ArrayBuffer i browseren med dokumentvalg, sideskift og zoom; udskiftning eller rydning af filvalget opdaterer forhåndsvisningen uden at gemme en kladde.",
+      "evidence": [
+        {
+          "resource": "repo://src/pdf-reader.js",
+          "version": "repo-file-v1:sha256:f2d3d3714affcf4540c98622de25f4cfff8489caefd0d006fd68cd19c7871379"
+        },
+        {
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:a9e44fca13ee44a81ac8ae8ff7da2d58cd9315d3531ca069c9e625dfdad4c1ef"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:18:44.043Z"
+    "at": "2026-11-08T20:25:05.177Z"
   }
 }

@@ -5,7 +5,7 @@ description: Skriv Under har én administrator, manuelt delte links, procesoverb
 tags: [quickstart, product, signing, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T20:18:44.043Z
+    at: 2026-11-08T20:25:05.177Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
@@ -41,7 +41,7 @@ sources:
     resource: repo://src/theme.js
   - id: openwiki-source-7b75006986d8b0337adc6ca0
     resource: repo://src/web.rs
-generated: { by: "codex", at: "2026-11-08T20:18:44.043Z" }
+generated: { by: "codex", at: "2026-11-08T20:25:05.177Z" }
 ---
 
 # Skriv Under
@@ -67,7 +67,7 @@ Modtagere får ingen konto og kan ikke tilgå dit arkiv eller dine øvrige dokum
 ## Det almindelige forløb
 
 1. Log ind, og vælg **Nyt dokument**.
-2. Vælg 1–10 PDF’er til pakken og angiv underskrivernes navne, ét pr. linje.
+2. Vælg 1–10 PDF’er til pakken. Gennemse dem direkte på uploadsiden med dokumentvalg, sideskift og zoom, før kladden gemmes. Angiv underskrivernes navne, ét pr. linje.
 3. Gennemse kladden, vælg **Opret signeringslinks**, og kopiér linket til hver modtager. Del selv links gennem den kanal, du vil bruge.
 4. Følg underskrifter, afventende personer og hændelser på dokumentets side. Status opdateres automatisk, mens siden er synlig.
 5. Når alle har underskrevet, hentes aftalen i **Signeret arkiv** sammen med kvitteringen og proceshistorikken.

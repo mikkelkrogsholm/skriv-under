@@ -5,7 +5,7 @@ description: Skriv Unders adgangsmodel, manuelt delte signeringslinks, procesove
 tags: [signing, access-control, tokens, workflow, archive, audit]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T20:18:44.043Z
+    at: 2026-11-08T20:25:05.177Z
 sources:
   - id: openwiki-source-abe5fae4c5d81d8288df4316
     resource: repo://examples/receipt_preview.rs
@@ -31,7 +31,7 @@ sources:
     resource: repo://tests/workflow.rs
   - id: openwiki-source-30ac601c64da3235a140715c
     resource: repo://vendor/pdfjs/README.md
-generated: { by: "codex", at: "2026-11-08T20:04:33.376Z" }
+generated: { by: "codex", at: "2026-11-08T20:25:05.177Z" }
 ---
 
 # Adgang, signeringsforløb og arkiv
@@ -76,6 +76,8 @@ Modtageren ser pakkens dokumenter i rækkefølge med filnavne, sidetal og SHA-25
 Signeringssiden har en indbygget læser med valg mellem pakkens originaler, forrige/næste side, sidetal og zoom. Den viser én side ad gangen og tilpasser bredden til skærmen. Navn og samtykkefelt bevares, mens der skiftes dokument eller side. **Vis sidens tekst** giver adgang til udtrækkelig tekst; billedscannede sider har ikke nødvendigvis tekst.
 
 Læseren bruger lokalt leveret PDF.js og en lokal worker med fonte, CMaps og WebAssembly-understøttelse. PDF’en hentes med samme dokumentbundne cookie som før; ingen filer sendes til en ekstern fremviser. JavaScript i PDF’er evalueres ikke. Fejl giver en forklaring, **Prøv igen** og et link til at åbne PDF’en separat. PDF-læsning giver fortsat ikke automatisk samtykke og beviser ikke, at personen har læst dokumentet.
+
+På **Nyt dokument** vises samme læser, så snart PDF-filerne er valgt. Forhåndsvisningen læser de lokale File-bytes uden at sende dem til serveren. Dokumentvalg, sideskift, zoom og sidetekst kan bruges før **Gem kladde**; ændring af filvalget erstatter forhåndsvisningen, og et tomt valg skjuler den. Originalerne gemmes først ved indsendelse af formularen.
 
 ## Følg processen
 
