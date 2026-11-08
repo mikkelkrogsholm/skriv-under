@@ -5,7 +5,7 @@ description: Opret og tilbagekald fulde admin-tokens, forbind en MCP-klient og b
 tags: [mcp, ai, tokens, administration, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T20:07:50.530Z
+    at: 2026-11-08T20:14:39.621Z
 sources:
   - id: openwiki-source-b6b7bc17569f2d75c652ef4d
     resource: repo://src/admin.rs

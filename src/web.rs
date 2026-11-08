@@ -98,7 +98,7 @@ fn page(title: &str, body: &str, session: Option<&str>) -> String {
         "<span class='nav-note'>Dokumenter. Aftaler. På plads.</span>".into()
     };
     format!(
-        "<!doctype html><html lang='da'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{} · Skriv Under</title><link rel='stylesheet' href='/assets/style.css'><script src='/assets/process.js' defer></script></head><body><a class='skip-link' href='#main'>Spring til indhold</a><header><a class='brand' href='/'><span class='brand-mark'>✓</span> Skriv Under</a>{nav}</header><main id='main'>{body}</main><footer>Skriv Under <span>Personlige links · Tydeligt samtykke · Dokumenteret forløb</span></footer></body></html>",
+        "<!doctype html><html lang='da'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{} · Skriv Under</title><script src='/assets/theme.js'></script><link rel='stylesheet' href='/assets/style.css'><script src='/assets/process.js' defer></script></head><body><a class='skip-link' href='#main'>Spring til indhold</a><header><a class='brand' href='/'><span class='brand-mark'>✓</span> Skriv Under</a><div class='header-actions'>{nav}<label class='theme-picker' for='theme'>Tema<select id='theme' name='theme'><option value='system'>System</option><option value='light'>Lyst</option><option value='dark'>Mørkt</option></select></label></div></header><main id='main'>{body}</main><footer>Skriv Under <span>Personlige links · Tydeligt samtykke · Dokumenteret forløb</span></footer></body></html>",
         esc(title)
     )
 }
@@ -247,6 +247,15 @@ pub fn router(app: Arc<App>) -> Router {
                 (
                     [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
                     include_str!("../vendor/pdfjs/pdf.worker.mjs"),
+                )
+            }),
+        )
+        .route(
+            "/assets/theme.js",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "text/javascript; charset=utf-8")],
+                    include_str!("theme.js"),
                 )
             }),
         )

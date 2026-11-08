@@ -16,6 +16,7 @@ Se [produktionsvejledningen](docs/production.md) for installation, backup og gen
 - 1–20 underskrivere og frist på 7, 14 eller 30 dage.
 - Personlige signeringslinks uden e-mailafsendelse eller modtagerkonti.
 - Indbygget PDF-læser med dokumentvalg, sideskift, zoom og sidens tekst.
+- Lyst og mørkt tema: følger systemet som standard, med manuelt valg gemt i browseren.
 - Procesoverblik med underskrifter, afventende personer og registrerede hændelser.
 - Afvisning, annullering og udskiftning af afventendes links.
 - Signeret arkiv med søgning og adgang til færdige aftaler efter afslutning.

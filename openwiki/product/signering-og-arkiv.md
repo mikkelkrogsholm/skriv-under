@@ -5,7 +5,7 @@ description: Skriv Unders adgangsmodel, manuelt delte signeringslinks, procesove
 tags: [signing, access-control, tokens, workflow, archive, audit]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T20:07:50.530Z
+    at: 2026-11-08T20:14:39.621Z
 sources:
   - id: openwiki-source-abe5fae4c5d81d8288df4316
     resource: repo://examples/receipt_preview.rs

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9d7e68f8f48ac1d9a853fe3326fec3a01bcb3ade8c99409d6690aafe56837899",
+  "pageVersion": "sha256:aa7cba1ac46abe36a0a7ec7757478717c99f497341a10aa85ea5858e1125d663",
   "claims": [
     {
       "id": "claim_eacf2b06a0674f029e062b3c2938c379",
@@ -16,7 +16,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -34,7 +34,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -108,7 +108,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         },
         {
           "resource": "repo://tests/workflow.rs",
@@ -126,7 +126,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         },
         {
           "resource": "repo://tests/workflow.rs",
@@ -155,6 +155,6 @@
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:07:50.530Z"
+    "at": "2026-11-08T20:14:39.621Z"
   }
 }

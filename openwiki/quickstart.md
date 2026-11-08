@@ -5,7 +5,7 @@ description: Skriv Under har én administrator, manuelt delte links, procesoverb
 tags: [quickstart, product, signing, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T20:07:50.530Z
+    at: 2026-11-08T20:14:39.621Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
@@ -33,9 +33,13 @@ sources:
     resource: repo://src/pdf.rs
   - id: openwiki-source-10dbc7a48ac0283046204658
     resource: repo://src/schema.sql
+  - id: openwiki-source-554339f52225d7d8edff3ed0
+    resource: repo://src/style.css
+  - id: openwiki-source-c4a12245c5bdd81230948fb9
+    resource: repo://src/theme.js
   - id: openwiki-source-7b75006986d8b0337adc6ca0
     resource: repo://src/web.rs
-generated: { by: "codex", at: "2026-11-08T20:04:33.376Z" }
+generated: { by: "codex", at: "2026-11-08T20:14:39.621Z" }
 ---
 
 # Skriv Under
@@ -43,6 +47,10 @@ generated: { by: "codex", at: "2026-11-08T20:04:33.376Z" }
 **Skriv Under** er et dansk dokumentsigneringssystem. Ejeren uploader én PDF eller en pakke med flere dokumenter, opretter personlige links til manuel deling, følger underskrifterne og finder den færdige aftale i sit signerede arkiv.
 
 Den offentlige installation ligger på [skrivunder.mikkelkrogsholm.dk](https://skrivunder.mikkelkrogsholm.dk). Se [produktionsvejledningen](../docs/production.md) for drift, backup og gendannelse.
+
+## Tema
+
+Vælg **System**, **Lyst** eller **Mørkt** under **Tema** i sidens top. Standard er System, som følger og reagerer på systemets farveindstilling. Et manuelt valg huskes lokalt i browseren og kan sættes tilbage til System. Det gælder login, admin og signeringssider. PDF-sidernes originale farver bevares.
 
 ## Hvem bruger hvad?
 

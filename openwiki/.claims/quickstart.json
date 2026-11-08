@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:cb1d4f9e0bd44c39352964fd44fbf4b8224dedd071ef0c2904331c443bfe04c9",
+  "pageVersion": "sha256:c104ceb1a4cce99a8ba9d94da8a660d42c92e3eec0c06a770ca02e6c7c606903",
   "claims": [
     {
       "id": "claim_7a8ed888aa024539b4c3b6cac9c84430",
@@ -12,7 +12,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -30,7 +30,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -62,7 +62,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -118,7 +118,7 @@
         },
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:8748ef071179c153b3d594c8a745ddfc90a3e6710b7bdeb125edcbc6fe0a9ac3"
+          "version": "repo-file-v1:sha256:3bcfc47344317d9fbd1c8bf89ba968c44069285f56202806d45d09266d1b9a18"
         },
         {
           "resource": "repo://rust-toolchain.toml",
@@ -154,7 +154,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     },
@@ -168,13 +168,31 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+        }
+      ]
+    },
+    {
+      "id": "claim_852dde3d2ccd4bb7802419e8e3b95377",
+      "statement": "Tema følger som standard systemets farveindstilling og reagerer på ændringer. Manuelt Lyst/Mørkt huskes i localStorage og kan nulstilles til System. Kontrollen findes på login, admin og signeringssider; PDF-sider forbliver originale.",
+      "evidence": [
+        {
+          "resource": "repo://src/style.css",
+          "version": "repo-file-v1:sha256:510bd8a42e94d6d08170602e36d27d0b45cf6cfb1ae9a06a5d8f7d3fc72edb98"
+        },
+        {
+          "resource": "repo://src/theme.js",
+          "version": "repo-file-v1:sha256:94588e63edd5d0d7b1040d8f139733fbb2fca4d4f33b2f8264792a0474a28a27"
+        },
+        {
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:07:50.530Z"
+    "at": "2026-11-08T20:14:39.621Z"
   }
 }
