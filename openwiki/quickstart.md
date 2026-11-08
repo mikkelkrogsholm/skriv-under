@@ -5,10 +5,12 @@ description: Skriv Under har én administrator, manuelt delte links, procesoverb
 tags: [quickstart, product, signing, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T20:14:39.621Z
+    at: 2026-11-08T20:18:44.043Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
+  - id: openwiki-source-787de22042c0263a263e7159
+    resource: repo://assets/brand/favicon.svg
   - id: openwiki-source-d5037beb9bfa41488c60312e
     resource: repo://docs/production.md
   - id: openwiki-source-abe5fae4c5d81d8288df4316
@@ -39,7 +41,7 @@ sources:
     resource: repo://src/theme.js
   - id: openwiki-source-7b75006986d8b0337adc6ca0
     resource: repo://src/web.rs
-generated: { by: "codex", at: "2026-11-08T20:14:39.621Z" }
+generated: { by: "codex", at: "2026-11-08T20:18:44.043Z" }
 ---
 
 # Skriv Under
@@ -112,3 +114,5 @@ De 12 MCP-værktøjer giver samme dokument-, proces-, arkiv- og tokenfunktioner 
 | Læse kode og afprøve ændringer | [README](../README.md), [webflow](../src/web.rs) og [integrationstests](../tests/workflow.rs) |
 
 Produktnavnet er **Skriv Under**. Den eksisterende projektmappe, Rust-crate og buildcache bruger fortsat den tekniske identifikator `document-signing`.
+
+Browserfaner bruger produktets grønne flueben som favicon i SVG og ICO. Der findes også et 180 px ikon til hjemmeskærmen.

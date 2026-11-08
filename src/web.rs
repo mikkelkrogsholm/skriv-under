@@ -98,7 +98,7 @@ fn page(title: &str, body: &str, session: Option<&str>) -> String {
         "<span class='nav-note'>Dokumenter. Aftaler. På plads.</span>".into()
     };
     format!(
-        "<!doctype html><html lang='da'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{} · Skriv Under</title><script src='/assets/theme.js'></script><link rel='stylesheet' href='/assets/style.css'><script src='/assets/process.js' defer></script></head><body><a class='skip-link' href='#main'>Spring til indhold</a><header><a class='brand' href='/'><span class='brand-mark'>✓</span> Skriv Under</a><div class='header-actions'>{nav}<label class='theme-picker' for='theme'>Tema<select id='theme' name='theme'><option value='system'>System</option><option value='light'>Lyst</option><option value='dark'>Mørkt</option></select></label></div></header><main id='main'>{body}</main><footer>Skriv Under <span>Personlige links · Tydeligt samtykke · Dokumenteret forløb</span></footer></body></html>",
+        "<!doctype html><html lang='da'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{} · Skriv Under</title><link rel='icon' href='/favicon.ico'><link rel='icon' type='image/svg+xml' href='/favicon.svg' sizes='any'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><script src='/assets/theme.js'></script><link rel='stylesheet' href='/assets/style.css'><script src='/assets/process.js' defer></script></head><body><a class='skip-link' href='#main'>Spring til indhold</a><header><a class='brand' href='/'><span class='brand-mark'>✓</span> Skriv Under</a><div class='header-actions'>{nav}<label class='theme-picker' for='theme'>Tema<select id='theme' name='theme'><option value='system'>System</option><option value='light'>Lyst</option><option value='dark'>Mørkt</option></select></label></div></header><main id='main'>{body}</main><footer>Skriv Under <span>Personlige links · Tydeligt samtykke · Dokumenteret forløb</span></footer></body></html>",
         esc(title)
     )
 }
@@ -183,6 +183,33 @@ pub fn router(app: Arc<App>) -> Router {
                 .get(mcp::no_stream)
                 .delete(mcp::no_stream)
                 .layer(DefaultBodyLimit::max(30 * 1024 * 1024)),
+        )
+        .route(
+            "/favicon.svg",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "image/svg+xml")],
+                    include_str!("../assets/brand/favicon.svg"),
+                )
+            }),
+        )
+        .route(
+            "/favicon.ico",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "image/x-icon")],
+                    include_bytes!("../assets/brand/favicon.ico").as_slice(),
+                )
+            }),
+        )
+        .route(
+            "/apple-touch-icon.png",
+            get(|| async {
+                (
+                    [(header::CONTENT_TYPE, "image/png")],
+                    include_bytes!("../assets/brand/apple-touch-icon.png").as_slice(),
+                )
+            }),
         )
         .route("/health", get(|| async { "ok" }))
         .route("/login", get(login_page).post(login))

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c104ceb1a4cce99a8ba9d94da8a660d42c92e3eec0c06a770ca02e6c7c606903",
+  "pageVersion": "sha256:a62ca2898d29f2666ccde83ddd3c5ec9803bc193535306e7a1991be030a34943",
   "claims": [
     {
       "id": "claim_7a8ed888aa024539b4c3b6cac9c84430",
@@ -12,7 +12,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     },
@@ -30,7 +30,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     },
@@ -62,7 +62,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     },
@@ -154,7 +154,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     },
@@ -168,7 +168,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     },
@@ -186,13 +186,27 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:b6d5c306b94a53f2f9acddb37efd0a9cdcb1ff0e9d1e303c33d4435dade31711"
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
+        }
+      ]
+    },
+    {
+      "id": "claim_7dbb5d731bc34c44861f0e3ad5022080",
+      "statement": "Det grønne flueben leveres som SVG-favicon, ICO i 16/32/48 px og 180 px Apple touch-ikon med links fra sidernes fælles head.",
+      "evidence": [
+        {
+          "resource": "repo://assets/brand/favicon.svg",
+          "version": "repo-file-v1:sha256:69edeb863d4a1ed26eb4e7737c8457ffa29598e5d1812ae5b5247a52ed57cfbc"
+        },
+        {
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:ddeb83acb450977403c28e713d79137309c2298a34f129661dc39438a0267ba3"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:14:39.621Z"
+    "at": "2026-11-08T20:18:44.043Z"
   }
 }
