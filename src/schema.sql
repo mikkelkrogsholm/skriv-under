@@ -46,3 +46,11 @@ CREATE TABLE IF NOT EXISTS admin_access_events (
 
 -- Access deduplication and per-recipient progress use this bounded lookup.
 CREATE INDEX IF NOT EXISTS events_access ON events (document_id, kind, actor, at);
+
+-- Immutable originals in a signing package. Legacy documents need no backfill.
+CREATE TABLE IF NOT EXISTS document_files (
+ document_id INTEGER NOT NULL REFERENCES documents(id), position INTEGER NOT NULL,
+ name TEXT NOT NULL, sha256 TEXT NOT NULL, pages INTEGER NOT NULL,
+ first_page INTEGER NOT NULL, pdf BLOB NOT NULL,
+ PRIMARY KEY(document_id, position)
+);

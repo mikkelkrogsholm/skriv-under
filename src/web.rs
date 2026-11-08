@@ -24,6 +24,7 @@ pub struct App {
 }
 type S = State<Arc<App>>;
 type Result<T> = std::result::Result<T, Error>;
+#[derive(Debug)]
 pub struct Error(pub(crate) StatusCode, pub(crate) String);
 impl IntoResponse for Error {
     fn into_response(self) -> Response {
@@ -97,7 +98,7 @@ fn page(title: &str, body: &str, session: Option<&str>) -> String {
         "<span class='nav-note'>Dokumenter. Aftaler. På plads.</span>".into()
     };
     format!(
-        "<!doctype html><html lang='da'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{} · Skriv Under</title><link rel='stylesheet' href='/assets/style.css'><script src='/assets/process.js' defer></script></head><body><header><a class='brand' href='/'><span class='brand-mark'>✓</span> Skriv Under</a>{nav}</header><main>{body}</main><footer>Skriv Under <span>Personlige links · Tydeligt samtykke · Dokumenteret forløb</span></footer></body></html>",
+        "<!doctype html><html lang='da'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>{} · Skriv Under</title><link rel='stylesheet' href='/assets/style.css'><script src='/assets/process.js' defer></script></head><body><a class='skip-link' href='#main'>Spring til indhold</a><header><a class='brand' href='/'><span class='brand-mark'>✓</span> Skriv Under</a>{nav}</header><main id='main'>{body}</main><footer>Skriv Under <span>Personlige links · Tydeligt samtykke · Dokumenteret forløb</span></footer></body></html>",
         esc(title)
     )
 }
@@ -484,7 +485,7 @@ async fn listing(app: &App, h: &HeaderMap, filter: ListFilter, archive: bool) ->
             } else {
                 String::new()
             };
-            body.push_str(&format!("<tr><td><a class='doc-title' href='/documents/{}'>▤ &nbsp;{}</a></td><td>{status}<small>{} af {} underskrevet</small><progress value='{}' max='{}' aria-label='Underskrifter for {}'></progress></td><td class='muted'>{info}</td><td class='row-actions'><a href='/documents/{}'>Se forløb →</a>{downloads}</td></tr>",d.id,esc(&d.title),d.signed,d.total,d.signed,d.total.max(1),esc(&d.title),d.id));
+            body.push_str(&format!("<tr><td><a class='doc-title' href='/documents/{}'>▤ &nbsp;{}</a><small>{} {}</small></td><td>{status}<small>{} af {} underskrevet</small><progress value='{}' max='{}' aria-label='Underskrifter for {}'></progress></td><td class='muted'>{info}</td><td class='row-actions'><a href='/documents/{}'>Se forløb →</a>{downloads}</td></tr>",d.id,esc(&d.title),d.file_count,if d.file_count==1 {"dokument"} else {"dokumenter i pakken"},d.signed,d.total,d.signed,d.total.max(1),esc(&d.title),d.id));
         }
         body.push_str("</tbody></table></div>");
     }
@@ -558,10 +559,29 @@ fn event_label(kind: &str) -> &str {
         _ => kind,
     }
 }
+fn package_manifest(files: &[db::SourceFile], base: &str) -> String {
+    if files.len() < 2 {
+        return String::new();
+    }
+    let mut html = format!(
+        "<section class='panel package-manifest'><div class='section-title'><h2>Dokumenter i pakken</h2><span>{} dokumenter · én underskrift</span></div><p class='muted'>Din underskrift omfatter alle dokumenterne nedenfor, i denne rækkefølge.</p><ol>",
+        files.len()
+    );
+    for f in files {
+        let url = if base == "/sign" {
+            format!("/sign/document.pdf?source={}", f.position)
+        } else {
+            format!("{base}/files/source-{}", f.position)
+        };
+        html.push_str(&format!("<li><span class='file-number'>{:02}</span><div><a href='{}' target='_blank' rel='noopener'>{} ↗</a><small>{} {} · side {}–{} i pakken</small><details><summary>Dokumentets SHA-256</summary><code class='hash'>{}</code></details></div></li>", f.position, url, esc(&f.name), f.pages, if f.pages == 1 {"side"} else {"sider"}, f.first_page, f.first_page+f.pages-1, f.sha256));
+    }
+    html.push_str("</ol></section>");
+    html
+}
 async fn new_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
     let (_, secret) = auth(&app, &h).await?;
     let body = format!(
-        "<a class='back' href='/'>← Alle dokumenter</a><div class='heading'><div><span class='eyebrow'>NY SIGNERINGSRUNDE</span><h1>Fra PDF til aftale.</h1><p class='muted'>Opret en kladde. Gennemse den, og opret derefter links til deling.</p></div></div><form class='panel editor' method='post' action='/documents' enctype='multipart/form-data'>{}<h2>01 &nbsp; Dokumentet</h2><label>Titel<input name='title' required maxlength='150' placeholder='Fx Samarbejdsaftale'></label><label>PDF-fil<input type='file' name='pdf' accept='application/pdf,.pdf' required><small>Højst 20 MiB og 200 sider. Uden adgangskode eller aktivt indhold.</small></label><label>Besked på signeringssiden<textarea name='message' maxlength='4000' rows='3' placeholder='En kort besked om dokumentet'></textarea></label><hr><h2>02 &nbsp; Underskrivere</h2><label>Underskrivernes navne — én person pr. linje<textarea name='recipients' required maxlength='10000' rows='4' placeholder='Anna Jensen&#10;Bo Hansen'></textarea><small>Højst 20 personer. Du får ét personligt link pr. person og deler selv linkene.</small></label><label>Frist efter oprettelse af links<select name='days'><option value='7'>7 dage</option><option value='14' selected>14 dage</option><option value='30'>30 dage</option></select></label><div class='form-actions'><a href='/'>Annullér</a><button>Gem kladde →</button></div></form>",
+        "<a class='back' href='/'>← Alle dokumenter</a><div class='heading'><div><span class='eyebrow'>NY SIGNERINGSRUNDE</span><h1>En aftale. Alle dokumenterne.</h1><p class='muted'>Saml dokumenterne, tilføj underskriverne, og gennemse pakken før du deler links.</p></div></div><form class='panel editor' method='post' action='/documents' enctype='multipart/form-data'>{}<div class='form-step'><span>1</span><div><h2>Dokumentpakken</h2><p>Ét personligt link. Én samlet underskrift.</p></div></div><label>Titel<input name='title' required maxlength='150' placeholder='Fx Samarbejdsaftale'></label><label for='package-pdfs'>PDF-dokumenter</label><div class='upload-area'><strong>Vælg dokumenterne til din aftale</strong><p>Fx hovedaftale, vilkår og bilag. Alle underskrives samlet.</p><input id='package-pdfs' type='file' name='pdf' accept='application/pdf,.pdf' multiple required aria-describedby='upload-help'><small id='upload-help'>1–10 PDF-filer. Tilsammen højst 20 MiB og 200 sider, uden adgangskode eller aktivt indhold.</small><ol class='upload-list' data-upload-list aria-live='polite'></ol></div><label>Besked på signeringssiden<textarea name='message' maxlength='4000' rows='3' placeholder='En kort besked om dokumentet'></textarea></label><hr><div class='form-step'><span>2</span><div><h2>Hvem skal underskrive?</h2><p>Hver person får ét link til hele pakken.</p></div></div><label>Underskrivernes navne — én person pr. linje<textarea name='recipients' required maxlength='10000' rows='4' placeholder='Anna Jensen&#10;Bo Hansen'></textarea><small>Højst 20 personer. Du får ét personligt link pr. person og deler selv linkene.</small></label><label>Frist efter oprettelse af links<select name='days'><option value='7'>7 dage</option><option value='14' selected>14 dage</option><option value='30'>30 dage</option></select></label><div class='form-actions'><a href='/'>Annullér</a><button>Gem kladde →</button></div></form>",
         csrf_field(&secret)
     );
     Ok(Html(page("Nyt dokument", &body, Some(&secret))))
@@ -569,7 +589,7 @@ async fn new_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
 async fn upload(State(app): S, h: HeaderMap, mut form: Multipart) -> Result<Redirect> {
     let (user, secret) = auth(&app, &h).await?;
     let mut values = std::collections::HashMap::new();
-    let mut bytes = None;
+    let mut files = Vec::new();
     while let Some(field) = form
         .next_field()
         .await
@@ -577,13 +597,19 @@ async fn upload(State(app): S, h: HeaderMap, mut form: Multipart) -> Result<Redi
     {
         let name = field.name().unwrap_or("").to_string();
         if name == "pdf" {
-            bytes = Some(
-                field
-                    .bytes()
-                    .await
-                    .map_err(|_| bad("PDF kunne ikke læses"))?
-                    .to_vec(),
-            );
+            if files.len() >= 10 {
+                return Err(bad("Vælg højst 10 PDF-filer"));
+            }
+            let filename = field.file_name().unwrap_or("Dokument.pdf").to_string();
+            let bytes = field
+                .bytes()
+                .await
+                .map_err(|_| bad("PDF kunne ikke læses"))?
+                .to_vec();
+            files.push(admin::UploadFile {
+                name: filename,
+                bytes,
+            });
         } else {
             let value = field.text().await.map_err(|_| bad("Ugyldigt felt"))?;
             if value.len() > 16000 {
@@ -594,7 +620,7 @@ async fn upload(State(app): S, h: HeaderMap, mut form: Multipart) -> Result<Redi
     }
     let value = |k: &str| values.get(k).map(String::as_str).unwrap_or("");
     check_csrf(&secret, value("csrf"))?;
-    let id = admin::create_document(
+    let id = admin::create_package(
         &app,
         user,
         "afsender",
@@ -603,8 +629,9 @@ async fn upload(State(app): S, h: HeaderMap, mut form: Multipart) -> Result<Redi
             message: value("message").into(),
             recipients: value("recipients").into(),
             days: value("days").parse().map_err(|_| bad("Ugyldig frist"))?,
-            pdf: bytes.ok_or_else(|| bad("Vælg en PDF"))?,
+            pdf: Vec::new(),
         },
+        files,
     )
     .await?;
     Ok(Redirect::to(&format!("/documents/{id}")))
@@ -621,10 +648,13 @@ async fn detail(State(app): S, Path(id): Path<i64>, h: HeaderMap) -> Result<Html
     let d = owned(&app, id, user).await?;
     let people = recipients(&app, id).await?;
     let mut body = format!(
-        "<a class='back' href='/'>← Alle dokumenter</a><div class='heading'><div><span class='eyebrow'>DOKUMENT #{id}</span><h1>{}</h1>{}</div><a class='button secondary' href='/documents/{id}/files/original'>Hent original PDF ↓</a></div><div class='detail-grid'><section class='panel'><h2>Underskrivere</h2><p class='muted'>Alle underskriver samme låste dokumentversion.</p>",
+        "<a class='back' href='/'>← Alle dokumenter</a><div class='heading'><div><span class='eyebrow'>DOKUMENT #{id}</span><h1>{}</h1>{}</div><a class='button secondary' href='/documents/{id}/files/original'>Hent original PDF ↓</a></div>",
         esc(&d.title),
         badge(&d.status)
     );
+    let files = db::source_files(&app.pool, id).await?;
+    body.push_str(&package_manifest(&files, &format!("/documents/{id}")));
+    body.push_str("<div class='detail-grid'><section class='panel'><h2>Underskrivere</h2><p class='muted'>Alle underskriver samme låste dokumentversion.</p>");
     let signed = people.iter().filter(|r| r.status == "signed").count();
     body.push_str(&format!("<div class='process-summary' data-process-id='{id}' data-revision='{revision}' data-status='{}'><p><strong>{signed} af {} underskrevet</strong></p><progress value='{signed}' max='{}' aria-label='Samlet signeringsfremdrift'></progress><small data-live-note>{}</small></div>",esc(&d.status),people.len(),people.len().max(1),if d.status=="pending" {"Status opdateres automatisk hvert 10. sekund."}else if d.status=="completed" {"Alle har underskrevet. Dokumentet er gemt i arkivet."} else {"Rundens hændelser er registreret i revisionssporet."}));
     if d.status == "pending" {
@@ -797,12 +827,22 @@ async fn open_invitation(State(app): S, Path(token): Path<String>) -> Result<Res
 async fn sign_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
     db::expire(&app.pool).await?;
     let (r, d, secret) = signer(&app, &h).await?;
+    let files = db::source_files(&app.pool, d.id).await?;
+    let is_package = files.len() > 1;
+    let consent = if is_package {
+        db::PACKAGE_CONSENT
+    } else {
+        db::CONSENT
+    };
     let mut body = format!(
         "<div class='heading'><div><span class='eyebrow'>PERSONLIG INVITATION TIL {}</span><h1>{}</h1>{}</div></div>",
         esc(&r.name),
         esc(&d.title),
         badge(&d.status)
     );
+    if ["pending", "completed"].contains(&d.status.as_str()) {
+        body.push_str(&package_manifest(&files, "/sign"));
+    }
     if d.status == "completed" {
         body.push_str("<section class='panel success'><h2>Alle underskrifter er på plads.</h2><p>Tak. Du kan nu hente det færdige dokument og signeringskvitteringen.</p><a class='button' href='/sign/document.pdf'>Hent færdig PDF ↓</a><a class='text-link' href='/sign/receipt.pdf'>Hent kvittering</a></section>");
     } else if d.status != "pending" {
@@ -812,7 +852,7 @@ async fn sign_page(State(app): S, h: HeaderMap) -> Result<Html<String>> {
         if r.status == "signed" {
             body.push_str("<section class='panel success'><h2>Din underskrift er registreret.</h2><p>Vi afventer de øvrige underskrivere. Brug dit personlige link igen for at hente den færdige aftale, når alle har underskrevet.</p></section>");
         } else {
-            body.push_str(&format!("<section class='panel signing'><span class='eyebrow'>DIN BEKRÆFTELSE</span><h2>Klar til at underskrive?</h2><p>Du underskriver dokumentversionen med SHA-256:</p><code class='hash'>{}</code><form method='post' action='/sign'>{}<input type='hidden' name='action' value='sign'><label>Dit fulde navn<input name='name' value='{}' required minlength='2' maxlength='120' autocomplete='name'></label><label class='checkbox'><input type='checkbox' name='agree' value='yes' required><span>{}</span></label><p class='muted'>Du bekræfter med det personlige link, du har modtaget fra afsenderen. Linket verificerer ikke din identitet. Der foretages ingen MitID-kontrol.</p><button>Underskriv dokumentet ✓</button></form><details><summary>Jeg ønsker at afvise dokumentet</summary><form method='post' action='/sign'>{}<input type='hidden' name='action' value='decline'><label>Begrundelse<textarea name='reason' required maxlength='1000' rows='3'></textarea></label><button class='danger'>Afvis dokumentet</button></form></details></section>",d.original_hash,csrf_field(&secret),esc(&r.name),esc(db::CONSENT),csrf_field(&secret)));
+            body.push_str(&format!("<section class='panel signing'><span class='eyebrow'>DIN BEKRÆFTELSE</span><h2>Klar til at underskrive?</h2><p>Gennemgå alle dokumenter ovenfor. Du underskriver den samlede dokumentversion med SHA-256:</p><code class='hash'>{}</code><form method='post' action='/sign'>{}<input type='hidden' name='action' value='sign'><label>Dit fulde navn<input name='name' value='{}' required minlength='2' maxlength='120' autocomplete='name'></label><label class='checkbox'><input type='checkbox' name='agree' value='yes' required><span>{}</span></label><p class='muted'>Du bekræfter med det personlige link, du har modtaget fra afsenderen. Linket verificerer ikke din identitet. Der foretages ingen MitID-kontrol.</p><button>{}</button></form><details><summary>Jeg ønsker at afvise dokumentet</summary><form method='post' action='/sign'>{}<input type='hidden' name='action' value='decline'><label>Begrundelse<textarea name='reason' required maxlength='1000' rows='3'></textarea></label><button class='danger'>Afvis dokumentet</button></form></details></section>",d.original_hash,csrf_field(&secret),esc(&r.name),esc(consent),if is_package {format!("Underskriv alle {} dokumenter ✓",files.len())} else {"Underskriv dokumentet ✓".into()},csrf_field(&secret)));
         }
     }
     Ok(Html(page(&d.title, &body, None)))
@@ -844,6 +884,12 @@ async fn sign(State(app): S, h: HeaderMap, Form(f): Form<SignForm>) -> Result<Re
             "Dokumentet er lukket, fristen er udløbet, eller du har allerede svaret",
         ));
     }
+    let sources: Vec<db::SourceFile> = sqlx::query_as("SELECT position,name,sha256,pages,first_page FROM document_files WHERE document_id=? ORDER BY position").bind(d.id).fetch_all(&mut *tx).await?;
+    let consent = if sources.len() > 1 {
+        db::PACKAGE_CONSENT
+    } else {
+        db::CONSENT
+    };
     match f.action.as_str() {
         "decline" => {
             let reason = f.reason.unwrap_or_default();
@@ -872,7 +918,7 @@ async fn sign(State(app): S, h: HeaderMap, Form(f): Form<SignForm>) -> Result<Re
             {
                 return Err(bad("Angiv dit fulde navn og bekræft samtykket"));
             }
-            sqlx::query("UPDATE recipients SET status='signed',signed_name=?,signed_at=?,consent=? WHERE id=?").bind(name).bind(db::now()).bind(db::CONSENT).bind(r.id).execute(&mut *tx).await?;
+            sqlx::query("UPDATE recipients SET status='signed',signed_name=?,signed_at=?,consent=? WHERE id=?").bind(name).bind(db::now()).bind(consent).bind(r.id).execute(&mut *tx).await?;
             db::event(
                 &mut tx,
                 d.id,
@@ -880,8 +926,7 @@ async fn sign(State(app): S, h: HeaderMap, Form(f): Form<SignForm>) -> Result<Re
                 &r.actor(),
                 &format!(
                     "Navn: {name}. SHA-256: {}. Samtykke: {}",
-                    d.original_hash,
-                    db::CONSENT
+                    d.original_hash, consent
                 ),
             )
             .await?;
@@ -906,7 +951,7 @@ async fn sign(State(app): S, h: HeaderMap, Form(f): Form<SignForm>) -> Result<Re
                 let hash = d.original_hash.clone();
                 let ps = people.clone();
                 let (final_pdf, receipt) = tokio::task::spawn_blocking(move || {
-                    pdf::complete(&original, document_id, &title, &hash, &ps)
+                    pdf::complete_package(&original, document_id, &title, &hash, &ps, &sources)
                 })
                 .await
                 .map_err(|_| bad("PDF-behandlingen fejlede; underskriften er ikke gemt"))?
@@ -962,7 +1007,15 @@ async fn owner_file(
     owned(&app, id, user).await?;
     file(&app, id, &kind, false).await
 }
-async fn sign_file(State(app): S, h: HeaderMap) -> Result<Response> {
+#[derive(Deserialize)]
+struct SourceQuery {
+    source: Option<u32>,
+}
+async fn sign_file(
+    State(app): S,
+    h: HeaderMap,
+    Query(query): Query<SourceQuery>,
+) -> Result<Response> {
     let (r, d, _) = signer(&app, &h).await?;
     if !["pending", "completed"].contains(&d.status.as_str())
         || d.status == "pending" && d.expires_at <= db::now()
@@ -979,6 +1032,9 @@ async fn sign_file(State(app): S, h: HeaderMap) -> Result<Response> {
     )
     .await?;
     tx.commit().await?;
+    if let Some(position) = query.source {
+        return file(&app, d.id, &format!("source-{position}"), true).await;
+    }
     file(
         &app,
         d.id,

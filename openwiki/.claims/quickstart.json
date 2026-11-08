@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5db27fec43915246f6620c0499f016b49e3d1bdf65b2f70cfed7045e13d7f6b0",
+  "pageVersion": "sha256:821bddacf65be25140acd76ad533ad4e4056b6cb5e84edc20e144c1ba85d2556",
   "claims": [
     {
       "id": "claim_7a8ed888aa024539b4c3b6cac9c84430",
       "statement": "Produktnavnet Skriv Under vises i sidetitler, navigation og footer samt nye PDF-kvitteringer.",
       "evidence": [
         {
-          "resource": "repo://src/pdf.rs#L265-L323",
-          "version": "repo-lines-v1:sha256:abaac1c076afc802a05d887d389862660d48c87743a30fdfefa5cc394c2d72fb:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYzZmQ3ZjcxODQ2MjgwYTIzZWJmMzQ4MmU5YmFiZTRkYTI1NzBjYjIwM2MwMWJiMzRlNDljZjNjMTY0NTQwMjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwODM5MjhmMDZjZTdhMzU1YjhjMmMyNWEwZTdhMzM3ZGY0ZmE3ZTM3OGY3NmE4N2FkY2I2NTBjZjNkYTcyNzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQzMWQyZjIwMTRkYzlmN2VlZmY0N2I3NDQ1MDNkZWM5MWU0NzQwZGFmY2RhN2RlNGVkNGIwNWQ2MGU1ZDE0MGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzMmM1NmEzNGY3N2JiYjVjNzk1YzQyZjI0NzkwNDAyNzdiNmFjYWMyOGRlNDM4MDBhZDE4MDc5YmZjOGI1NWEifQ"
+          "resource": "repo://src/pdf.rs",
+          "version": "repo-file-v1:sha256:cadc591d2f4a7913cf2b82a92b0728091ce87b2498f2ff999ac6506aab897046"
         },
         {
-          "resource": "repo://src/web.rs#L90-L102",
-          "version": "repo-lines-v1:sha256:9e289a56cadaac72e881b2b6cf52b365c4d98c8e70b6a6187f80bf03f4f73359:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2YTJiYmZhNjE3YmJlODZiMWE5ZGZiYzI2NGVjY2ZmYTBmMGYwYjY3MzM3OWQ3ODQ2MTAzZTI2MGQzNTI4MjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcxM2M2ZmFhZTU4NTkyYjU5NTIwYTVkMzhjNWIwZmExYzQ4Njc0YjUxMjgxNDA3ODQ5YzEzZDNlYzQ0ODNkNTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFjZjMzMjVhMzJjM2ViN2VkOGIyMmQ2OWNmZmI0MWNiZGQxMjg5YTRhZGIxN2VkYjM5NzE0MTBiZTBmMDg5NjAifQ"
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
         }
       ]
     },
@@ -21,16 +21,16 @@
       "statement": "Én administrator har login og kan give AI fulde MCP-tokens; modtagere har kun dokumentbundne tokens. Admin har oversigt, processtatus og arkiv.",
       "evidence": [
         {
-          "resource": "repo://src/mcp.rs#L125-L148",
-          "version": "repo-lines-v1:sha256:3b21db596c82f17b65e2f2146f0e20d72382128a8052e549752a5df8ada7ae5f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2MzE4ZGJkYjQxZWMxN2NkM2M1ZTU4OTIzZGY0NjMwNzcyNmJmY2E3OGZlMjZmOTYyMjM4MDE0ODBjMGI3NDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0NzVlOTRhOTA0YWM0OWIzMTU0ZDQ2NzJhNjZlODYyOWI4NmRhYzc0ZTNlMjkzN2JlNjkyN2FlM2RhMTFjNTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZjYTdhNzcwNTcyMzZlYzkwMTE0NDE2ZGZmOTg0MDU4Y2U0MjA3NGI3NGRkMjE1NTdiZDZhMmU5Y2QwNmM2OTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiMmUwNTJiMzBhYTlhZTdlNTg3MmEyNTdhODg1NjU5YjdmMTQxYTg4MzdjNjE4MzliNzdkNDc0OTFkMmNlNTUifQ"
+          "resource": "repo://src/mcp.rs",
+          "version": "repo-file-v1:sha256:789697e3d6520783012d2cfa8425b30749db1154169f318075f6355e18082696"
         },
         {
           "resource": "repo://src/schema.sql",
-          "version": "repo-file-v1:sha256:b4d5fabb7e3233a99cce4ff42e394d72b627b5bfc1317005970a0926ab595a7c"
+          "version": "repo-file-v1:sha256:ad0c814ad7d76646a16cc6fd24fa8a247141878596b6718297b049ac06b70e7c"
         },
         {
-          "resource": "repo://src/web.rs#L130-L223",
-          "version": "repo-lines-v1:sha256:2d4f91da1fbce1779c02751042440b7817d2b633acf70c78e54e9464b328d724:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdlNWJlZTI1YTgyZWE0OTAxMjU3MGExNWZlZTMwNGZiOTAxMjA1NTkyOTAxZjhlYzk3MWY5OGZjZGYyOTliZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YTBmMGZhMGZjNTNjZTRkNzM5NGFmOGYzYTI5YzhlMzgyZjkwNzM3MDNkOWIyMWQ1YjNjOTY2YjcwZDQ2YTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhM2Q5ZDJiNDQ3NDhiNjQwMTc1NzYzZjQ4YWIwNDcyN2MzZjk5ZDhiMjQ5YjY4ODEzZmUyZjMxOGM1YWIyNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjliYTIwYmFmZjExOTY4MzAxNGZjNzFlYTE0ZjVkMzdkNzhkYTQzMWY5OWU0ZDhlODk0NmI3MTJkNzViZjI3ODQifQ"
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
         }
       ]
     },
@@ -53,16 +53,16 @@
       "statement": "Administratoren angiver modtagernavne og kopierer personlige links til manuel deling; appen kræver ingen modtager-e-mails og sender ingen e-mails.",
       "evidence": [
         {
-          "resource": "repo://src/admin.rs#L17-L77",
-          "version": "repo-lines-v1:sha256:2e286ca2af356308ed766bb6341cb636cd42f081567f215b31ac516a5eeb5ab2:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzMTRmNzBkNDc2MjlmYjljZGVkNTYxMDI4MGZmNjE4MmVlYWY5NTgzZGNiMjI2YjRiYjRiZjJmNGVkNDE3NDciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI4MDQyODEwNmQxMTIxM2UyNTU4ZTBlMThkNDFmZTIzYzRhN2ZlODJjY2EzYjBmOWU5ZjUxNmUzOWE5NTBhNGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2ODc5YmNiMjFhMGZjOGI4Zjk1MmNkMjQ3OTkxMTdjNmVkZjFhZDA3YzNmNDE0Y2NlNTFlN2YzZjIyNWU2NjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUxNWY5ZTgwNjU5YzVhMjMxZDUyZWEzZWY3Y2E2OTU1M2JmZjBmODRmZGJmZWNlMDg4ZGQzYTU3YzVhZmQ5MWIifQ"
+          "resource": "repo://src/admin.rs",
+          "version": "repo-file-v1:sha256:8d247dfe4f47398558704094b8fa61e56320e15821332afeffd6632aa935a456"
         },
         {
-          "resource": "repo://src/main.rs#L159-L193",
-          "version": "repo-lines-v1:sha256:5d1ff55d8194a314e9175f0ac5069c362a0d29fd649a2c43fdd55ebc21d2706d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjMzM0NWQ3Y2IyMjg5NDc4MWRjYjE1NGYyYjA0N2MwNjdkOTU2NzVjMTExM2I2YzU0MWYwYzZkOTAzYWJkODgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwZjM1YTcyMzU2YTEwM2I5OTc5ZTg2ZDI3MDAzMzlkZjBlOTM2YTkxYWFlMTBlNzU4OTA0OGZmYTlkMjc5YzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/main.rs",
+          "version": "repo-file-v1:sha256:2c1a9f4b7eb24119f96af99abb693f23668584d167128efc9f782625cf7b6b6e"
         },
         {
-          "resource": "repo://src/web.rs#L613-L656",
-          "version": "repo-lines-v1:sha256:58fa5fc30c680467cfbe87af6328e16de400ca416e66e886a9e026f90bda0bd0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMGQ4Yjk4ZTRjYjVjOTlhMGNmMWRkYmI2NzhiZTNjZTA2YjM0MmJiYjY4NTNiNDY5YmY4YWU0NmMyZDQyN2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU1MjJjNDJjZDE5YzZkMDNkODA4YzQ1MjcyMDU1MjgyNWI3ZWExYzViNDkxYjIxODUxMWNhYzc0MTVjZjlkOWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3N2UzMTBlMTE5ZTJmMDM3ZTRkNTFlZWNmOTg3ODI2ZjNjZWY0ZTcwODZjMjIyYjkyMmVlMDVjZTFlNGViMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5YzE5ZmI3MDYxN2Q4YzNmYWRlMjc0ZGIzZjk0YTZjNWJlY2U0MjBkZWRjNmM4ZTUxM2YyY2M5ZWZkODQ5OWEifQ"
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
         }
       ]
     },
@@ -82,19 +82,15 @@
       "evidence": [
         {
           "resource": "repo://src/admin.rs",
-          "version": "repo-file-v1:sha256:1593d18aeeee575ad59d22c3bc1ae6090d3c1d5a54282898713180892c36b2c2"
+          "version": "repo-file-v1:sha256:8d247dfe4f47398558704094b8fa61e56320e15821332afeffd6632aa935a456"
         },
         {
-          "resource": "repo://src/mcp.rs#L405-L606",
-          "version": "repo-lines-v1:sha256:7a7b31e4330c141ffc6787f77e298f1dff192cb637b99129588115f8a1a41d7c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAyLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIzOTBhZmI2NWEwNTJkNmVjMmFjNTYwYjgyNDZiNTUzNDUzMWEyYzFhNGU3Y2Q2ZmY3YjFkNTM4MzNkZmExN2RmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0MTJjYTM0NWNjZjc1YmY5YzA4MDZiY2U2OTViZThkZTgwOGI3OTk4NDI1MWE3YTU0ZDIwMmNmNjEwMWRkNDUxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI1ZTA2NjNkZmUyNTI4NTM4ZjllNGFlNDc4YTg4YzcyMjA3ZjBhMDZhZGRhYjAwOWUwY2NiNTgxODkzYzA0OGMxIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+          "resource": "repo://src/mcp.rs",
+          "version": "repo-file-v1:sha256:789697e3d6520783012d2cfa8425b30749db1154169f318075f6355e18082696"
         },
         {
-          "resource": "repo://src/web.rs#L1018-L1103",
-          "version": "repo-lines-v1:sha256:5606f1121902a6e982f9ef4850d4567908fef14bcedc7647f89c9f71344cba90:eyJzZWxlY3RlZExpbmVDb3VudCI6ODYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiYjg4NjZkOWQwMjg3ZjE0YTUzNTYwZTI2N2E0MzZhZTZmMDRkNTg5M2UzMDc5M2U4NTJhNmRhOTViNWNkOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhkYjQyOWZkNTZiZjU0MjY3NjdjZTEyODE3MzBlOWE4YTczOWVhZGJmNTc0NWVlNjQyNDU2YWRmZmE2ODk5ODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
-        },
-        {
-          "resource": "repo://src/web.rs#L828-L930",
-          "version": "repo-lines-v1:sha256:fdab6786532efa89625db72c4f158a1e49accbd853a970f2e7cbc5b54a71cee7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5NDRhNDE3NGQ5ODM1NjM2MjEyNjcxMDZkMzRlMTQwNzY1Y2M0YjZlZDVjYzM4MDVjMGU1ODIwNjRjZWMxN2QyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI4ODFhOGNiMmUyNDhlZDE0MjlmZGRhYmEzYTYwNWYwOGQyZDk1OTY5N2RlNmVlZDRjMDdhMTZiODAyYjRlOTcxIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJjMzI5ZjhlNDM3OGJhYWQyMzE5NWNjZDM2MDQ0Y2M0MGU0Yjk5NGU0YmFhMjc3Y2FhZTcyMjQzMDI2YmVmYzc2IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIwZWUzYTcwOGM1YzRhZTM0NzBkNzBjNzNmM2VhNTU0ZjlmMTM3NTdjNGU3MTJmODNmMzNhYjViZTY4ODkzZDA1In0"
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
         }
       ]
     },
@@ -103,12 +99,12 @@
       "statement": "Gentagne adgangsbesøg samles i ét minut; revisionsudtræk læses i én transaktion for at undgå blandede tilstande ved samtidig signering.",
       "evidence": [
         {
-          "resource": "repo://src/admin.rs#L183-L212",
-          "version": "repo-lines-v1:sha256:971d5572b441b879ba8a365a8a57c3f7c3212a13b7515ed2c8029cbda7265528:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxOTMzMzFjOWYxYzk4NzM2MDg0MGU1MDI3NWMwMjMyNDcxMTc5NDc0OTFkMWE4MTgxMjk2OThhNmNmZjAyNWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1ZjZmNDY2ZTU5Y2ZjMzA3MDNjNDVmNzJhZjY1ZGU1NGFjMzYzZDM1NGNjMWEzMzMwMzUwYWNkNDUyNDM0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5OTJjYzk5ZThmMGMzMDU3MWYzOGQ3YmVmMGRiZjkwYmVjYTJiOGViNzFiMGQ4ZTQwMzAwMTYxZjQ0NzRhYzcifQ"
+          "resource": "repo://src/admin.rs",
+          "version": "repo-file-v1:sha256:8d247dfe4f47398558704094b8fa61e56320e15821332afeffd6632aa935a456"
         },
         {
-          "resource": "repo://src/db.rs#L193-L206",
-          "version": "repo-lines-v1:sha256:932823b176b000e74b1d3f3ba39eca0fb4d648f78e18b64dce7efe0e3d6c5cee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkODQwNDJiY2Q2YmRlMmE0OWRhZTE4MjIyMjMyN2Q3YjU3N2RhMjEyMWI3NzY4ZTU2ODk2ZWYzYzE1N2Y4YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1ZjZmNDY2ZTU5Y2ZjMzA3MDNjNDVmNzJhZjY1ZGU1NGFjMzYzZDM1NGNjMWEzMzMwMzUwYWNkNDUyNDM0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://src/db.rs",
+          "version": "repo-file-v1:sha256:32f0e81bcee15b90e947919921d77f9955e188c1eaa070c19a8856c2da73e974"
         }
       ]
     },
@@ -122,7 +118,7 @@
         },
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:08e940be8f44789d921d740f36e37126dd16df279dadcc542f9021b56891767d"
+          "version": "repo-file-v1:sha256:26d78955e78da631135ee9afcde66b229e9c5f2e7c23d7d4134490dec3cf387f"
         },
         {
           "resource": "repo://rust-toolchain.toml",
@@ -143,10 +139,28 @@
           "version": "repo-file-v1:sha256:919469df16278567d965a6182ac009f5a79ced34c7f48163fd93f5ac2d7a615f"
         }
       ]
+    },
+    {
+      "id": "claim_ce2d08e3049545e1bd3d112e4ee2ebef",
+      "statement": "Upload understøtter 1–10 PDF’er i én pakke og én samlet underskrift. Pakkens originaler vises med navne, sider og hashes, og færdig download indeholder alle originalernes sider og signeringsbilaget.",
+      "evidence": [
+        {
+          "resource": "repo://src/admin.rs",
+          "version": "repo-file-v1:sha256:8d247dfe4f47398558704094b8fa61e56320e15821332afeffd6632aa935a456"
+        },
+        {
+          "resource": "repo://src/pdf.rs",
+          "version": "repo-file-v1:sha256:cadc591d2f4a7913cf2b82a92b0728091ce87b2498f2ff999ac6506aab897046"
+        },
+        {
+          "resource": "repo://src/web.rs",
+          "version": "repo-file-v1:sha256:cc07b1ffae33f299acfe4e10e4cab5850cb20a2cf60918ff0cb2125a42eae9f5"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T16:42:19.277Z"
+    "at": "2026-11-08T19:54:14.556Z"
   }
 }

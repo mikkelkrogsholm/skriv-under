@@ -120,6 +120,19 @@ pub struct Recipient {
     pub reason: Option<String>,
     pub consent: Option<String>,
 }
+#[derive(Clone, serde::Serialize, sqlx::FromRow)]
+pub struct SourceFile {
+    pub position: i64,
+    pub name: String,
+    pub sha256: String,
+    pub pages: i64,
+    pub first_page: i64,
+}
+pub async fn source_files(pool: &SqlitePool, id: i64) -> Result<Vec<SourceFile>, sqlx::Error> {
+    sqlx::query_as("SELECT position,name,sha256,pages,first_page FROM document_files WHERE document_id=? ORDER BY position")
+        .bind(id).fetch_all(pool).await
+}
+pub const PACKAGE_CONSENT: &str = "Jeg har læst alle dokumenter i pakken og accepterer at underskrive dem samlet elektronisk. Min bekræftelse gælder alle de viste dokumentversioner og registreres sammen med dokumenternes navne og hashes i signeringskvitteringen.";
 pub const CONSENT: &str = "Jeg har læst dokumentet og accepterer at underskrive det elektronisk. Min bekræftelse knyttes til denne dokumentversion og registreres i signeringskvitteringen.";
 
 pub async fn expire(pool: &SqlitePool) -> Result<(), sqlx::Error> {
@@ -149,6 +162,7 @@ pub struct DocumentOverview {
     pub status: String,
     pub created_at: i64,
     pub completed_at: Option<i64>,
+    pub file_count: i64,
     pub total: i64,
     pub signed: i64,
     pub awaiting: Option<String>,
@@ -158,6 +172,7 @@ pub struct DocumentOverview {
 pub async fn overview(pool: &SqlitePool, owner: i64) -> Result<Vec<DocumentOverview>, sqlx::Error> {
     sqlx::query_as("SELECT d.id,d.title,d.status,d.created_at,
         (SELECT max(at) FROM events WHERE document_id=d.id AND kind='completed') AS completed_at,
+        max(1,(SELECT count(*) FROM document_files WHERE document_id=d.id)) AS file_count,
         (SELECT count(*) FROM recipients WHERE document_id=d.id) AS total,
         (SELECT count(*) FROM recipients WHERE document_id=d.id AND status='signed') AS signed,
         (SELECT group_concat(name, ', ') FROM recipients WHERE document_id=d.id AND status='pending') AS awaiting,

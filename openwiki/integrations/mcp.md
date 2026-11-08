@@ -5,7 +5,7 @@ description: Opret og tilbagekald fulde admin-tokens, forbind en MCP-klient og b
 tags: [mcp, ai, tokens, administration, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T16:42:19.277Z
+    at: 2026-11-08T19:54:14.556Z
 sources:
   - id: openwiki-source-b6b7bc17569f2d75c652ef4d
     resource: repo://src/admin.rs
@@ -21,7 +21,7 @@ sources:
     resource: repo://src/web.rs
   - id: openwiki-source-a4d0d6fea18ea7627c71affd
     resource: repo://tests/workflow.rs
-generated: { by: "codex", at: "2026-11-07T11:19:15.922Z" }
+generated: { by: "codex", at: "2026-11-08T19:54:14.556Z" }
 ---
 
 # AI-adgang med MCP
@@ -40,7 +40,7 @@ Brug adressen vist på siden: som standard `http://127.0.0.1:3080/mcp`. Vælg St
 | --- | --- |
 | Søgning, filtrering, 25 rækker pr. side og signeret arkiv | `list_documents` |
 | Dokument, besked, underskrivere, status, hændelser og aktuelle links | `get_document` |
-| Upload PDF og opret kladde | `create_document` |
+| Upload én PDF eller en dokumentpakke og opret kladde | `create_document` |
 | Start runde, frist og personlige links | `start_signing` |
 | Udskift afventendes links | `rotate_signing_links` |
 | Annuller kladde eller igangværende runde | `cancel_document` |
@@ -51,7 +51,7 @@ Brug adressen vist på siden: som standard `http://127.0.0.1:3080/mcp`. Vælg St
 | Opret fuldt admin-token | `create_admin_token` |
 | Tilbagekald et token, også klientens eget | `revoke_admin_token` |
 
-Upload bruger `pdf_base64` med standard base64 uden data-URL. Samme validering gælder for PDF, titel, besked, underskrivere og frist. Download returnerer en indlejret PDF-resource med base64-`blob` og MIME-type `application/pdf`, samt tekstmetadata med filnavn, byteantal og SHA-256. Adminadgang til arkiverede filer gælder efter udløb af særskilte læselinks.
+Upload bruger enten `pdf_base64` for én PDF eller `files: [{"name":"Aftale.pdf","pdf_base64":"…"}, …]` for en dokumentpakke. Angiv præcis én af de to former. Pakken indeholder 1–10 filer, tilsammen højst 20 MiB og 200 sider; også den samlede PDF skal være højst 20 MiB. Base64 er standardformatet uden data-URL. `get_document` og `get_audit_trail` returnerer `files` med rækkefølge, navn, SHA-256, sidetal og første side i pakken. `get_document_file` bruger `original` for den samlede original, `final` for den signerede pakke, `receipt` for bilaget og `source-1` til `source-10` for uændrede originalfiler. Samme validering gælder for PDF, titel, besked, underskrivere og frist. Download returnerer en indlejret PDF-resource med base64-`blob` og MIME-type `application/pdf`, samt tekstmetadata med filnavn, byteantal og SHA-256. Adminadgang til arkiverede filer gælder efter udløb af særskilte læselinks.
 
 HTML og MCP kalder de samme operationer i [admin.rs](../../src/admin.rs). Det omfatter søgning, oprettelse, tilstandsændringer, transaktioner, linkrotation, PDF-bytes og revisionsdata. Revisionsudtræk læses i én transaktion, så status, underskrifter, hændelser og hashes kommer fra samme tilstand, også ved samtidig signering. Metadataopslag indlæser ikke PDF-BLOBs. Derfor gælder blandt andet 60 sekunders ventetid ved linkrotation og samme regler om lukkede runder. MCP kan ikke give samtykke eller underskrive på modtagernes vegne. Lokal kontoopsætning og adgangskodeskift foregår fortsat i terminalen.
 
@@ -69,7 +69,7 @@ Adminfladen og `list_admin_tokens` viser de seneste 100 hændelser. `admin_acces
 
 Endpointet understøtter `initialize`, notifikationer, `ping`, `tools/list` og `tools/call`. Det er stateless og opretter ingen MCP-server-session. POST returnerer JSON; autentificeret GET og DELETE returnerer 405. Protokolversionerne er `2025-11-25`, `2025-06-18` og `2025-03-26`.
 
-Adgangskontrollen kører før request-body læses. Almindelige formularer er begrænset til 64 KiB, multipart-upload til 22 MiB og MCP til 30 MiB; selve PDF-filen er stadig højst 20 MiB.
+Adgangskontrollen kører før request-body læses. Almindelige formularer er begrænset til 64 KiB, multipart-upload til 22 MiB og MCP til 30 MiB; pakken og dens samlede PDF er stadig højst 20 MiB.
 
 `Host` skal matche `BASE_URL`, og en eventuel `Origin` skal matche samme oprindelse. Reverse proxy skal bevare Host. Log ikke Authorization-headeren eller rå links. Ugyldige eller udløbne credentials giver 401; ugyldig Origin eller Host giver 403. JSON-RPC-fejl og værktøjsfejl holdes adskilt. Notifikationer kan aldrig udføre adminhandlinger.
 

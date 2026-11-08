@@ -5,7 +5,7 @@ description: Skriv Under har én administrator, manuelt delte links, procesoverb
 tags: [quickstart, product, signing, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T16:42:19.277Z
+    at: 2026-11-08T19:54:14.556Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
@@ -33,12 +33,12 @@ sources:
     resource: repo://src/schema.sql
   - id: openwiki-source-7b75006986d8b0337adc6ca0
     resource: repo://src/web.rs
-generated: { by: "codex", at: "2026-11-08T16:42:19.277Z" }
+generated: { by: "codex", at: "2026-11-08T19:54:14.556Z" }
 ---
 
 # Skriv Under
 
-**Skriv Under** er et dansk dokumentsigneringssystem. Ejeren uploader en PDF, opretter personlige links til manuel deling, følger underskrifterne og finder den færdige aftale i sit signerede arkiv.
+**Skriv Under** er et dansk dokumentsigneringssystem. Ejeren uploader én PDF eller en pakke med flere dokumenter, opretter personlige links til manuel deling, følger underskrifterne og finder den færdige aftale i sit signerede arkiv.
 
 Den offentlige installation ligger på [skrivunder.mikkelkrogsholm.dk](https://skrivunder.mikkelkrogsholm.dk). Se [produktionsvejledningen](../docs/production.md) for drift, backup og gendannelse.
 
@@ -48,19 +48,19 @@ Den offentlige installation ligger på [skrivunder.mikkelkrogsholm.dk](https://s
 | --- | --- | --- |
 | Dig som eneste administrator | Login og adgangskode | Oprette links, følge processen, annullere, erstatte links og hente arkiverede aftaler |
 | Din valgte AI-klient | Navngivet MCP-token med udløb | Samme muligheder som adminfladen, inklusive tokenadministration |
-| Modtager | Personligt tokenlink til ét dokument | Se dokumentet, underskrive med navn og samtykke eller afvise med begrundelse |
+| Modtager | Personligt tokenlink til én dokumentpakke | Se dokumenterne, underskrive med navn og samtykke eller afvise med begrundelse |
 
 Modtagere får ingen konto og kan ikke tilgå dit arkiv eller dine øvrige dokumenter. Databasen tillader højst én administrator.
 
 ## Det almindelige forløb
 
 1. Log ind, og vælg **Nyt dokument**.
-2. Upload en PDF og angiv underskrivernes navne, ét pr. linje.
+2. Vælg 1–10 PDF’er til pakken og angiv underskrivernes navne, ét pr. linje.
 3. Gennemse kladden, vælg **Opret signeringslinks**, og kopiér linket til hver modtager. Del selv links gennem den kanal, du vil bruge.
 4. Følg underskrifter, afventende personer og hændelser på dokumentets side. Status opdateres automatisk, mens siden er synlig.
 5. Når alle har underskrevet, hentes aftalen i **Signeret arkiv** sammen med kvitteringen og proceshistorikken.
 
-En linkåbning registreres som en åbning og kan komme fra en scanner. Gentagne åbninger og PDF-visninger samles pr. modtager og type i ét minut. Selve underskriften kræver modtagerens aktive bekræftelse. Den færdige PDF får bilaget **Underskrifter og dokumentation** med indtastede navne, signeringsreferencer, præcise tidspunkter, gemte samtykker og originalens dokumenthash. Bilaget kan fortsætte over flere sider og hentes separat; der foretages ingen MitID-kontrol eller certifikatbaseret PDF-forsegling.
+En linkåbning registreres som en åbning og kan komme fra en scanner. Gentagne åbninger og PDF-visninger samles pr. modtager og type i ét minut. Selve underskriften kræver modtagerens aktive bekræftelse. Ved en pakke vises alle originaler med navn, sider og hash, og **Underskriv alle N dokumenter** bekræfter dem samlet. Pakken må højst være 20 MiB og 200 sider i alt. Den færdige PDF får bilaget **Underskrifter og dokumentation** med indtastede navne, signeringsreferencer, præcise tidspunkter, gemte samtykker og hashes for den samlede original og pakkens enkelte dokumenter. Bilaget kan fortsætte over flere sider og hentes separat; der foretages ingen MitID-kontrol eller certifikatbaseret PDF-forsegling.
 
 ## Installér og start
 

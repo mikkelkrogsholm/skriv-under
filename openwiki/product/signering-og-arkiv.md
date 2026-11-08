@@ -5,7 +5,7 @@ description: Skriv Unders adgangsmodel, manuelt delte signeringslinks, procesove
 tags: [signing, access-control, tokens, workflow, archive, audit]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-07T11:19:15.922Z
+    at: 2026-11-08T19:54:14.556Z
 sources:
   - id: openwiki-source-abe5fae4c5d81d8288df4316
     resource: repo://examples/receipt_preview.rs
@@ -27,7 +27,7 @@ sources:
     resource: repo://src/web.rs
   - id: openwiki-source-a4d0d6fea18ea7627c71affd
     resource: repo://tests/workflow.rs
-generated: { by: "codex", at: "2026-11-07T11:19:15.922Z" }
+generated: { by: "codex", at: "2026-11-08T19:54:14.556Z" }
 ---
 
 # Adgang, signeringsforløb og arkiv
@@ -50,9 +50,9 @@ AI-ændringer kan identificeres med `mcp:{token-ID}` i revisionssporet. Tokenudl
 
 ## Fra kladde til underskrift
 
-Administratoren uploader en PDF på højst 20 MiB og 200 sider og angiver titel, besked, 1–20 unikke underskrivernavne og en frist på 7, 14 eller 30 dage. PDF'er med blandt andet adgangskodebeskyttelse, aktivt indhold, vedhæftede filer eller eksisterende certifikatunderskrifter afvises. Kontrollen dækker også FileAttachment-annoteringer og EF-filer uden navnetræ. Sidetræet må bruge indirekte Kids og Count; sideantallet skal stemme med de faktiske sider.
+Administratoren uploader 1–10 PDF’er som én pakke på tilsammen højst 20 MiB og 200 sider; også den samlede PDF skal være højst 20 MiB. Administratoren angiver titel, besked, 1–20 unikke underskrivernavne og en frist på 7, 14 eller 30 dage. PDF'er med blandt andet adgangskodebeskyttelse, aktivt indhold, vedhæftede filer eller eksisterende certifikatunderskrifter afvises. Kontrollen dækker også FileAttachment-annoteringer og EF-filer uden navnetræ. Sidetræet må bruge indirekte Kids og Count; sideantallet skal stemme med de faktiske sider.
 
-Originale PDF-bytes og deres SHA-256-hash gemmes. Dokumentet og modtagerne kan ikke redigeres efter upload; en ændring kræver en ny runde. Ved **Opret signeringslinks** går kladden til `pending`, fristen starter, og administratoren får et link pr. underskriver. Der kræves ingen modtager-e-mail. Administratoren kopierer og deler selv links gennem sin valgte kanal.
+Originale PDF-bytes og deres SHA-256-hash gemmes for hver fil i `document_files`. Pakken har en samlet PDF, hvor hvert oprindeligt sidetræ bevares med sine ressourcer, sidestørrelser og rotation. Dokumentlisten viser antal filer. Dokumentet og modtagerne kan ikke redigeres efter upload; en ændring kræver en ny runde. Ved **Opret signeringslinks** går kladden til `pending`, fristen starter, og administratoren får et link pr. underskriver. Der kræves ingen modtager-e-mail. Administratoren kopierer og deler selv links gennem sin valgte kanal.
 
 | Dokumentstatus | Betydning |
 | --- | --- |
@@ -63,7 +63,7 @@ Originale PDF-bytes og deres SHA-256-hash gemmes. Dokumentet og modtagerne kan i
 | `expired` | Fristen er udløbet |
 | `cancelled` | Administratoren har annulleret runden |
 
-Modtageren indtaster sit navn og accepterer den viste samtykketekst, før POST-handlingen kan registrere underskriften. CSRF, dokumentstatus, udløb, token og tidligere svar kontrolleres. Opdateringen og revisionshændelsen sker i én transaktion. En allerede besvaret invitation kan ikke underskrive igen.
+Modtageren ser pakkens dokumenter i rækkefølge med filnavne, sidetal og SHA-256 og kan åbne hver uændret original. Ét personligt link gælder hele pakken. Modtageren indtaster sit navn og accepterer den viste samtykketekst for alle dokumenter med **Underskriv alle N dokumenter**, før POST-handlingen kan registrere underskriften. CSRF, dokumentstatus, udløb, token og tidligere svar kontrolleres. Opdateringen og revisionshændelsen sker i én transaktion. En allerede besvaret invitation kan ikke underskrive igen.
 
 **Erstat links til afventende** roterer tokens for ubesvarede invitationer og gør deres tidligere links ugyldige. Allerede registrerede underskrifter bevares. Der skal gå mindst 60 sekunder mellem linkudskiftninger. Links kan kopieres igen fra administratorens dokumentside, også efter genstart. Afvisning med begrundelse og annullering lukker runden; udløb kontrolleres både ved indsendelse og i vedligeholdelsesarbejderen.
 
@@ -96,6 +96,8 @@ PDF'erne indeholder en dokumenteret elektronisk bekræftelse. Der foretages inge
 
 Nye afsluttede aftaler får bilaget **Underskrifter og dokumentation** efter originalens sider. Det samme bilag kan hentes som en separat PDF. Eksisterende arkiverede aftaler omskrives ikke.
 
+Ved en dokumentpakke viser bilaget desuden filnavn, sidetal, sideinterval og SHA-256 for hver original under **Dokumenter omfattet af den samlede underskrift**. Den gemte pakkesamtykketekst gælder alle dokumentversionerne. Den færdige download er én PDF med alle dokumenternes sider og et fælles signeringsbilag. En afvisning gælder hele pakken.
+
 Bilaget viser dokumentreference `SU-{dokument-ID}`, titel, originalens sideantal, SHA-256 af originalen uden bilag og tidspunktet for den sidste registrerede underskrift. Hver underskriver får en reference `SU-{dokument-ID}-{modtager-ID}` samt:
 
 - Det indtastede underskriftsnavn, fremhævet som elektronisk underskrift.
@@ -108,6 +110,8 @@ Metoden beskrives som et personligt link oprettet til manuel deling. Bilaget ind
 Ved mange underskrivere eller lange navne fortsætter bilaget over flere nummererede sider. Underskriftsblokke holdes samlet, når de kan være på én side. Bilagssider har deres egen A4-beskæring og rotation, også hvis originalen er roteret eller beskåret.
 
 Eksportens status, underskrifter, hash og hændelser læses i én databasetransaktion, så en samtidig underskrift ikke blander to tilstande. Metadataopslag indlæser kun dokumentfelter, ikke PDF-BLOBs.
+
+JSON-eksportens `files` viser hver originals position, navn, hash, sidetal og første side i pakken. Adgang til en original afledes altid fra invitationens egen pakke.
 
 JSON-eksporten indeholder samme dokumentreference og en liste med signeringsreferencer, modtagernavne, underskrevne navne, gemte samtykker og signeringstidspunkter som Unix-sekunder. Hændelserne får desuden deres oprindelige numeriske tidsstempel, så tider ikke kun fremgår afrundet til minutter.
 

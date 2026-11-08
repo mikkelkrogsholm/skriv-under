@@ -5,7 +5,7 @@ description: Start Skriv Under, vedligehold den eneste administratorkonto, besky
 tags: [operations, configuration, links, storage, rust]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-08T16:42:19.277Z
+    at: 2026-11-08T19:54:14.556Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
@@ -49,7 +49,7 @@ sources:
     resource: repo://src/web.rs
   - id: openwiki-source-a4d0d6fea18ea7627c71affd
     resource: repo://tests/workflow.rs
-generated: { by: "codex", at: "2026-11-08T16:42:19.277Z" }
+generated: { by: "codex", at: "2026-11-08T19:54:14.556Z" }
 ---
 
 # Drift, links og buildplads
@@ -93,7 +93,7 @@ Tilbagekaldelse i adminfladen afviser efterfølgende forespørgsler. Tokens admi
 
 ## Ressourcegrænser
 
-MCP kontrollerer Host, Origin og token før læsning af request-body. Almindelige formularer har en grænse på 64 KiB, PDF-multipart 22 MiB og MCP 30 MiB til base64; selve PDF-filen er stadig højst 20 MiB. Metadataopslag vælger kun metadatafelter, så proceskontrol ikke indlæser store PDF-BLOBs.
+MCP kontrollerer Host, Origin og token før læsning af request-body. Almindelige formularer har en grænse på 64 KiB, PDF-multipart 22 MiB og MCP 30 MiB til base64; pakken og dens samlede PDF er stadig højst 20 MiB. Metadataopslag vælger kun metadatafelter, så proceskontrol ikke indlæser store PDF-BLOBs.
 
 Gentagne linkåbninger og PDF-visninger samles til højst én revisionshændelse pr. modtager og type pr. minut. Hændelserne forbliver uændrede; senere besøg tilføjer nye hændelser. Et indeks på dokument, hændelsestype, aktør og tidspunkt understøtter kontrollen. Dette er en begrænsning af logvækst, ikke en generel beskyttelse mod trafikoverbelastning.
 
@@ -104,6 +104,8 @@ Gentagne linkåbninger og PDF-visninger samles til højst én revisionshændelse
 Tag backup af både SQLite-databasen og `link-key`. Hvis nøglen mangler, mens der allerede findes genererede links, stopper appen opstarten med en besked om at gendanne nøglen. En eksisterende nøgle kontrolleres mod de gemte signerings- og læselinks, så også en forkert nøgle på præcis 32 bytes afvises. Nøglen må ikke ligge i Git, wikien, logs eller buildmappen.
 
 Opgradering fra e-mailversionen gør modtagerens historiske e-mailfelt valgfrit. Nye invitationer bruger kun navne. Eksisterende dokumenter, PDF'er, underskrifter og hændelser bevares. Gamle mailkøer deaktiveres, og uafsendte beskeder tømmes; der findes ingen mailarbejder, der kan sende dem. Gamle udbakkefiler kan fortsat findes som private historiske filer, men læses og sendes ikke af appen.
+
+Dokumentpakker tilføjer tabellen `document_files` med uændrede originaler, rækkefølge, filnavne, hashes og sider. Eksisterende dokumenter behøver ingen omskrivning og fungerer fortsat som enkeltstående PDF’er. Den eksisterende SQLite-backup omfatter også den nye tabel.
 
 ## Data og procesdrift
 

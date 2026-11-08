@@ -25,3 +25,21 @@ document.addEventListener('click', async (event) => {
     } catch { /* Keep the current view when temporarily offline. */ }
   }, 10000);
 })();
+
+(() => {
+  const input = document.getElementById('package-pdfs');
+  const list = document.querySelector('[data-upload-list]');
+  if (!input || !list) return;
+  input.addEventListener('change', () => {
+    list.replaceChildren();
+    let bytes = 0;
+    for (const file of input.files) {
+      bytes += file.size;
+      const item = document.createElement('li');
+      item.textContent = `${file.name} · ${(file.size / 1024 / 1024).toLocaleString('da-DK', { maximumFractionDigits: 1 })} MiB`;
+      list.append(item);
+    }
+    input.setCustomValidity(input.files.length > 10 ? 'Vælg højst 10 PDF-filer.' : bytes > 20 * 1024 * 1024 ? 'Filerne må tilsammen højst fylde 20 MiB.' : '');
+    input.reportValidity();
+  });
+})();

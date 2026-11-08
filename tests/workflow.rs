@@ -2344,3 +2344,272 @@ fn trusted_proxy_configuration_rejects_public_bind_and_invalid_flags_before_crea
         assert!(!data.exists());
     }
 }
+
+async fn upload_package(t: &TestApp, files: &[(&str, Vec<u8>)]) -> Reply {
+    let boundary = "package-test-boundary";
+    let mut body = Vec::new();
+    for (key, value) in [
+        ("csrf", db::csrf(&t.session)),
+        ("title", "Aftale med bilag".into()),
+        ("message", "Gennemgå begge dokumenter".into()),
+        ("recipients", "Anna Jensen\nBo Hansen".into()),
+        ("days", "14".into()),
+    ] {
+        body.extend(
+            format!(
+                "--{boundary}\r\nContent-Disposition: form-data; name=\"{key}\"\r\n\r\n{value}\r\n"
+            )
+            .as_bytes(),
+        );
+    }
+    for (name, bytes) in files {
+        body.extend(format!("--{boundary}\r\nContent-Disposition: form-data; name=\"pdf\"; filename=\"{name}\"\r\nContent-Type: application/pdf\r\n\r\n").as_bytes());
+        body.extend(bytes);
+        body.extend(b"\r\n");
+    }
+    body.extend(format!("--{boundary}--\r\n").as_bytes());
+    request(
+        &t.router,
+        "POST",
+        "/documents",
+        Some(&format!("session={}", t.session)),
+        body,
+        &format!("multipart/form-data; boundary={boundary}"),
+    )
+    .await
+}
+
+#[tokio::test]
+async fn package_signing_preserves_every_original_and_documents_one_consent_for_all() {
+    let t = setup().await;
+    let first = sample_pdf();
+    let mut second = Document::load_mem(&first).unwrap();
+    let root = second
+        .catalog()
+        .unwrap()
+        .get(b"Pages")
+        .unwrap()
+        .as_reference()
+        .unwrap();
+    let page = second.get_pages()[&1];
+    second
+        .get_object_mut(page)
+        .unwrap()
+        .as_dict_mut()
+        .unwrap()
+        .remove(b"MediaBox");
+    let tree = second.get_object_mut(root).unwrap().as_dict_mut().unwrap();
+    tree.set("MediaBox", vec![0.into(), 0.into(), 400.into(), 600.into()]);
+    tree.set("Rotate", 90);
+    tree.set("Resources", dictionary! {});
+    let mut second_bytes = Vec::new();
+    second.save_to(&mut second_bytes).unwrap();
+    assert_eq!(
+        upload_package(
+            &t,
+            &[
+                ("Aftale.pdf", first.clone()),
+                ("Vilkår.pdf", second_bytes.clone())
+            ]
+        )
+        .await
+        .status,
+        StatusCode::SEE_OTHER
+    );
+    let id = 1;
+    let files = db::source_files(&t.app.pool, id).await.unwrap();
+    assert_eq!(files.len(), 2);
+    assert_eq!(files[1].first_page, 2);
+    assert_eq!(files[0].sha256, db::hash(&first));
+    assert_eq!(files[1].sha256, db::hash(&second_bytes));
+    let combined = document_signing::admin::file_bytes(&t.app, id, "original")
+        .await
+        .unwrap();
+    let merged = Document::load_mem(&combined).unwrap();
+    assert_eq!(merged.get_pages().len(), 2);
+    let p = merged.get_dictionary(merged.get_pages()[&2]).unwrap();
+    let parent = merged
+        .get_dictionary(p.get(b"Parent").unwrap().as_reference().unwrap())
+        .unwrap();
+    assert_eq!(parent.get(b"Rotate").unwrap().as_i64().unwrap(), 90);
+    assert_eq!(
+        parent.get(b"MediaBox").unwrap().as_array().unwrap()[2]
+            .as_i64()
+            .unwrap(),
+        400
+    );
+    assert_eq!(
+        document_signing::admin::file_bytes(&t.app, id, "source-2")
+            .await
+            .unwrap(),
+        second_bytes
+    );
+    assert_eq!(
+        t.post("/documents/1/start", &[]).await.status,
+        StatusCode::SEE_OTHER
+    );
+    let tokens = t.tokens(id).await;
+    assert_eq!(tokens.len(), 2);
+    let signer_cookie = format!("signer={}", tokens[0]);
+    let view = request(&t.router, "GET", "/sign", Some(&signer_cookie), vec![], "").await;
+    let html = String::from_utf8(view.body).unwrap();
+    assert!(html.contains("Vilkår.pdf"));
+    assert!(html.contains("Underskriv alle 2 dokumenter"));
+    assert!(html.contains(db::PACKAGE_CONSENT));
+    let source = request(
+        &t.router,
+        "GET",
+        "/sign/document.pdf?source=2",
+        Some(&signer_cookie),
+        vec![],
+        "",
+    )
+    .await;
+    assert_eq!(source.status, StatusCode::OK);
+    assert_eq!(source.body, second_bytes);
+    assert_eq!(
+        request(
+            &t.router,
+            "GET",
+            "/sign/document.pdf?source=2",
+            None,
+            vec![],
+            ""
+        )
+        .await
+        .status,
+        StatusCode::FORBIDDEN
+    );
+    // Another document's personal link cannot retrieve this package's second original.
+    let other = t.upload().await;
+    t.post(&format!("/documents/{other}/start"), &[]).await;
+    let unrelated = t.tokens(other).await;
+    assert_eq!(
+        request(
+            &t.router,
+            "GET",
+            "/sign/document.pdf?source=2",
+            Some(&format!("signer={}", unrelated[0])),
+            vec![],
+            ""
+        )
+        .await
+        .status,
+        StatusCode::NOT_FOUND
+    );
+    assert_eq!(t.sign(&tokens[0]).await.status, StatusCode::SEE_OTHER);
+    assert_eq!(t.state(id).await, "pending");
+    let (a, b) = tokio::join!(t.sign(&tokens[1]), t.sign(&tokens[1]));
+    assert!([a.status, b.status].contains(&StatusCode::SEE_OTHER));
+    assert!([a.status, b.status].contains(&StatusCode::BAD_REQUEST));
+    assert_eq!(t.state(id).await, "completed");
+    let audit = document_signing::admin::audit(&t.app, 1, id).await.unwrap();
+    assert_eq!(audit["files"].as_array().unwrap().len(), 2);
+    assert_eq!(audit["signatures"][0]["consent"], db::PACKAGE_CONSENT);
+    let receipt = document_signing::admin::file_bytes(&t.app, id, "receipt")
+        .await
+        .unwrap();
+    let receipt = Document::load_mem(&receipt).unwrap();
+    let text = receipt
+        .extract_text(&receipt.get_pages().keys().copied().collect::<Vec<_>>())
+        .unwrap();
+    for expected in [
+        "Aftale.pdf",
+        "Vilkår.pdf",
+        &files[0].sha256,
+        &files[1].sha256,
+        "alle dokumenter",
+    ] {
+        assert!(text.contains(expected), "Missing {expected}: {text}");
+    }
+    let final_pdf = document_signing::admin::file_bytes(&t.app, id, "final")
+        .await
+        .unwrap();
+    let final_pdf = Document::load_mem(&final_pdf).unwrap();
+    assert_eq!(final_pdf.get_pages().len(), 2 + receipt.get_pages().len());
+}
+
+#[tokio::test]
+async fn package_upload_rejects_invalid_members_and_limits_without_partial_data() {
+    let t = setup().await;
+    let original = sample_pdf();
+    let many_pages = pdf::combine(&vec![original.as_slice(); 101]).unwrap();
+    let mut large_a = original.clone();
+    large_a.resize(10 * 1024 * 1024, b' ');
+    let mut large_b = original.clone();
+    large_b.resize(11 * 1024 * 1024, b' ');
+    for files in [
+        vec![
+            ("Aftale.pdf", many_pages.clone()),
+            ("Bilag.pdf", many_pages),
+        ],
+        vec![("Aftale.pdf", large_a), ("Bilag.pdf", large_b)],
+        vec![
+            ("Aftale.pdf", sample_pdf()),
+            ("Bad.pdf", b"not a PDF".to_vec()),
+        ],
+        (0..11).map(|_| ("Aftale.pdf", sample_pdf())).collect(),
+        vec![],
+    ] {
+        assert_eq!(
+            upload_package(&t, &files).await.status,
+            StatusCode::BAD_REQUEST
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("SELECT count(*) FROM documents")
+                .fetch_one(&t.app.pool)
+                .await
+                .unwrap(),
+            0
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("SELECT count(*) FROM document_files")
+                .fetch_one(&t.app.pool)
+                .await
+                .unwrap(),
+            0
+        );
+    }
+}
+
+#[tokio::test]
+async fn mcp_package_has_upload_manifest_originals_and_validation_parity() {
+    use base64::{Engine, engine::general_purpose::STANDARD};
+    use serde_json::json;
+    let t = setup().await;
+    let token = mcp_token(&t).await;
+    let file = STANDARD.encode(sample_pdf());
+    let args = json!({"title":"Pakke via MCP","days":7,"recipients":["Anna"],"files":[{"name":"Aftale.pdf","pdf_base64":file},{"name":"Bilag.pdf","pdf_base64":file}]});
+    let created = mcp_call(&t, &token, "create_document", args.clone()).await;
+    assert_eq!(created["isError"], false, "{created}");
+    assert_eq!(
+        created["structuredContent"]["files"]
+            .as_array()
+            .unwrap()
+            .len(),
+        2
+    );
+    let id = created["structuredContent"]["id"].as_i64().unwrap();
+    let original = mcp_call(
+        &t,
+        &token,
+        "get_document_file",
+        json!({"document_id":id,"kind":"source-2"}),
+    )
+    .await;
+    assert_eq!(original["isError"], false);
+    assert_eq!(original["content"][1]["resource"]["blob"], file);
+    let mut invalid = args;
+    invalid["pdf_base64"] = json!(file);
+    assert_eq!(
+        mcp_call(&t, &token, "create_document", invalid).await["isError"],
+        true
+    );
+    assert_eq!(
+        sqlx::query_scalar::<_, i64>("SELECT count(*) FROM documents")
+            .fetch_one(&t.app.pool)
+            .await
+            .unwrap(),
+        1
+    );
+}

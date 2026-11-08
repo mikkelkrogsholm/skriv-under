@@ -89,6 +89,57 @@ pub fn validate(bytes: &[u8]) -> Result<(), String> {
     Ok(())
 }
 
+fn load(bytes: &[u8]) -> Result<Document, String> {
+    Document::load_mem_with_options(
+        bytes,
+        lopdf::LoadOptions {
+            max_decompressed_size: Some(64 * 1024 * 1024),
+            ..Default::default()
+        },
+    )
+    .map_err(|_| "PDF-filen kunne ikke læses".into())
+}
+pub fn page_count(bytes: &[u8]) -> Result<usize, String> {
+    Ok(load(bytes)?.get_pages().len())
+}
+/// Keep each input page tree intact, including inherited resources and page geometry.
+pub fn combine(inputs: &[&[u8]]) -> Result<Vec<u8>, String> {
+    if inputs.len() == 1 {
+        return Ok(inputs[0].to_vec());
+    }
+    let mut output = Document::with_version("1.7");
+    let root = output.new_object_id();
+    let mut kids = Vec::new();
+    let mut count = 0;
+    for bytes in inputs {
+        let mut source = load(bytes)?;
+        count += source.get_pages().len();
+        source.renumber_objects_with(output.max_id + 1);
+        let pages = source
+            .catalog()
+            .and_then(|c| c.get(b"Pages"))
+            .and_then(Object::as_reference)
+            .map_err(|_| "PDF-filens sidetræ kunne ikke samles")?;
+        source
+            .get_object_mut(pages)
+            .and_then(Object::as_dict_mut)
+            .map_err(|_| "PDF-filens sidetræ kunne ikke samles")?
+            .set("Parent", root);
+        output.max_id = source.max_id;
+        output.objects.extend(source.objects);
+        kids.push(Object::Reference(pages));
+    }
+    output.objects.insert(
+        root,
+        Object::Dictionary(dictionary! {"Type"=>"Pages", "Kids"=>kids, "Count"=>count as i64}),
+    );
+    let catalog = output.add_object(dictionary! {"Type"=>"Catalog", "Pages"=>root});
+    output.trailer.set("Root", catalog);
+    let mut bytes = Vec::new();
+    output.save_to(&mut bytes).map_err(|e| e.to_string())?;
+    Ok(bytes)
+}
+
 // The standard PDF fonts cover Danish and Western European characters. Unsupported
 // characters are rendered as numeric references, also preserved literally in audit JSON.
 fn text_bytes(s: &str) -> Vec<u8> {
@@ -156,6 +207,7 @@ fn receipt_pages(
     hash: &str,
     original_pages: usize,
     recipients: &[Recipient],
+    sources: &[db::SourceFile],
 ) -> Result<Vec<Vec<ReceiptLine>>, String> {
     let completed = recipients
         .iter()
@@ -184,6 +236,24 @@ fn receipt_pages(
     }
     intro.push(blank());
     blocks.push(intro);
+    if sources.len() > 1 {
+        let mut manifest = wrapped("DOKUMENTER OMFATTET AF DEN SAMLEDE UNDERSKRIFT", false);
+        for file in sources {
+            manifest.extend(wrapped(
+                &format!(
+                    "{}. {} | side {}–{} | SHA-256:",
+                    file.position,
+                    file.name,
+                    file.first_page,
+                    file.first_page + file.pages - 1
+                ),
+                false,
+            ));
+            manifest.extend(wrapped(&file.sha256, false));
+        }
+        manifest.push(blank());
+        blocks.push(manifest);
+    }
     for (index, r) in recipients.iter().enumerate() {
         let name = r
             .signed_name
@@ -211,7 +281,11 @@ fn receipt_pages(
                 "Bekræftet: {}",
                 timestamp(r.signed_at.ok_or("Signeringstidspunkt mangler")?)?
             ),
-            "Handling: Underskriv dokumentet + aktiv accept af samtykke.".into(),
+            if sources.len() > 1 {
+                "Handling: Underskriv alle dokumenter + aktiv accept af samtykke.".into()
+            } else {
+                "Handling: Underskriv dokumentet + aktiv accept af samtykke.".into()
+            },
             format!("Accepteret samtykke: {consent}"),
         ] {
             block.extend(wrapped(&text, false));
@@ -362,6 +436,16 @@ pub fn complete(
     hash: &str,
     recipients: &[Recipient],
 ) -> Result<(Vec<u8>, Vec<u8>), String> {
+    complete_package(original, document_id, title, hash, recipients, &[])
+}
+pub fn complete_package(
+    original: &[u8],
+    document_id: i64,
+    title: &str,
+    hash: &str,
+    recipients: &[Recipient],
+    sources: &[db::SourceFile],
+) -> Result<(Vec<u8>, Vec<u8>), String> {
     if recipients.is_empty()
         || recipients.iter().any(|r| {
             r.document_id != document_id
@@ -388,6 +472,7 @@ pub fn complete(
         hash,
         final_doc.get_pages().len(),
         recipients,
+        sources,
     )?;
     let mut receipt = Document::with_version("1.7");
     let root =

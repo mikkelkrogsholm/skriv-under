@@ -380,6 +380,15 @@ struct CreateArgs {
     message: String,
     recipients: Vec<String>,
     days: i64,
+    #[serde(default)]
+    pdf_base64: Option<String>,
+    #[serde(default)]
+    files: Option<Vec<CreateFile>>,
+}
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct CreateFile {
+    name: String,
     pdf_base64: String,
 }
 #[derive(Deserialize)]
@@ -415,15 +424,30 @@ async fn call_tool(app: &App, p: &Principal, name: &str, v: Value) -> Result<Val
         }
         "create_document" => {
             let a: CreateArgs = args(v)?;
-            if a.pdf_base64.len() > 28 * 1024 * 1024
-                || a.recipients.iter().any(|s| s.chars().any(char::is_control))
-            {
-                return Err(bad("Ugyldig PDF-størrelse eller modtagernavn"));
+            if a.recipients.iter().any(|s| s.chars().any(char::is_control)) {
+                return Err(bad("Ugyldigt modtagernavn"));
             }
-            let pdf = STANDARD
-                .decode(a.pdf_base64)
-                .map_err(|_| bad("PDF skal være gyldig base64"))?;
-            let id = admin::create_document(
+            let source_files = match (a.pdf_base64, a.files) {
+                (Some(pdf_base64), None) => vec![CreateFile {
+                    name: "Dokument.pdf".into(),
+                    pdf_base64,
+                }],
+                (None, Some(files)) if !files.is_empty() && files.len() <= 10 => files,
+                _ => return Err(bad("Angiv enten pdf_base64 eller files med 1–10 PDF-filer")),
+            };
+            let mut files = Vec::new();
+            for f in source_files {
+                if f.pdf_base64.len() > 28 * 1024 * 1024 {
+                    return Err(bad("PDF er for stor"));
+                }
+                files.push(admin::UploadFile {
+                    name: f.name,
+                    bytes: STANDARD
+                        .decode(f.pdf_base64)
+                        .map_err(|_| bad("PDF skal være gyldig base64"))?,
+                });
+            }
+            let id = admin::create_package(
                 app,
                 p.user,
                 &p.actor,
@@ -432,8 +456,9 @@ async fn call_tool(app: &App, p: &Principal, name: &str, v: Value) -> Result<Val
                     message: a.message,
                     recipients: a.recipients.join("\n"),
                     days: a.days,
-                    pdf,
+                    pdf: Vec::new(),
                 },
+                files,
             )
             .await?;
             admin::document(app, p.user, id).await?
@@ -514,9 +539,9 @@ pub fn tool_definitions() -> Vec<Value> {
         ),
         tool(
             "create_document",
-            "Upload PDF som base64 og opret kladde. Højst 20 MiB/200 sider og 1–20 unikke underskrivernavne. Ingen e-mail. Dokumentet og modtagerne låses ved upload. Brug start_signing separat.",
-            json!({"title":{"type":"string","minLength":1,"maxLength":150},"message":{"type":"string","maxLength":4000},"recipients":{"type":"array","minItems":1,"maxItems":20,"items":{"type":"string","minLength":1,"maxLength":120}},"days":{"type":"integer","enum":[7,14,30]},"pdf_base64":{"type":"string","description":"Standard base64 af PDF-filen; ingen data-URL"}}),
-            &["title", "recipients", "days", "pdf_base64"],
+            "Upload én PDF med pdf_base64 ELLER en dokumentpakke med files [{name,pdf_base64}]. Opretter kladde. Højst 10 filer, tilsammen 20 MiB/200 sider og 1–20 unikke underskrivernavne. Ingen e-mail. Dokumentet og modtagerne låses ved upload. Brug start_signing separat.",
+            json!({"title":{"type":"string","minLength":1,"maxLength":150},"message":{"type":"string","maxLength":4000},"recipients":{"type":"array","minItems":1,"maxItems":20,"items":{"type":"string","minLength":1,"maxLength":120}},"days":{"type":"integer","enum":[7,14,30]},"pdf_base64":{"type":"string","description":"Én PDF. Udelades når files bruges. Standard base64 uden data-URL"},"files":{"type":"array","minItems":1,"maxItems":10,"items":{"type":"object","properties":{"name":{"type":"string","minLength":1,"maxLength":200},"pdf_base64":{"type":"string"}},"required":["name","pdf_base64"],"additionalProperties":false}}}),
+            &["title", "recipients", "days"],
             false,
             false,
             false,
@@ -559,8 +584,8 @@ pub fn tool_definitions() -> Vec<Value> {
         ),
         tool(
             "get_document_file",
-            "Hent original, færdig PDF eller separat signeringsbilag. Returnerer en indlejret PDF-resource med base64-blob, filnavn og SHA-256. Arkivadgang gælder også efter læselinks udløber.",
-            json!({"document_id":{"type":"integer","minimum":1},"kind":{"type":"string","enum":["original","final","receipt"]}}),
+            "Hent samlet original, færdig PDF, separat signeringsbilag eller en uændret originalfil med kind source-1 til source-10. Returnerer en indlejret PDF-resource med base64-blob, filnavn og SHA-256. Arkivadgang gælder også efter læselinks udløber.",
+            json!({"document_id":{"type":"integer","minimum":1},"kind":{"type":"string","pattern":"^(original|final|receipt|source-([1-9]|10))$"}}),
             &["document_id", "kind"],
             true,
             false,
