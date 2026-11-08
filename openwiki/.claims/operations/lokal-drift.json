@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b4060a61c76fc5e2fa45078c75b5f864893c362f11bc616a40d61722d915e0cf",
+  "pageVersion": "sha256:2c697ebeda4c7aaaa7a8defa17da92c0b9b0c4490f921e8457ed474857ddd465",
   "claims": [
     {
       "id": "claim_8addc60e20d349c8b64ae2141d9ea387",
@@ -11,8 +11,8 @@
           "version": "repo-lines-v1:sha256:47e655d1f0ab3ab1e13500dabc425d60565454a32307afd96678b3d9c71381ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTgwOWRlZmRkODdkZTEzZjcxMDE2MTNjZTc4MGIyMjg0MzdiMTRhNzNiNTY5MTc5NjNmMTM1N2QyMDkyOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ODdmNjVjMTM1YTJiNDcyY2M5OWFjMjNlYzNiYzAwMWM3MjhhOWQ1NWFiODUwY2VkZjFhODlmMjZlOWNlOTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MDFhYjFkMjEyMTE3Mzc3YjhmYTFmODE4MGJlYzVkZDZmZDEzZGQzYmIxMjI5ODhjNTQxYzEyZWNmYWVlYzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNTA2NzMyNDkwZDhiYjhhOWI4Y2IyMzU0ZjZkZTFjZTQ1MmRmMzNhNmQzYTM2ZTRiNDVjZGM1NDdmYWYxZTAifQ"
         },
         {
-          "resource": "repo://src/web.rs#L268-L343",
-          "version": "repo-lines-v1:sha256:1d69ab1733da965065796b62a0dd833d865eeb6c9e9b823504bdf0b1a7da2900:eyJzZWxlY3RlZExpbmVDb3VudCI6NzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4MWIzMjhiM2M1N2FhYWNmMjI0NTcxOWQ3Y2I2MWRjN2JiMzRiYzE2ZTdiOThiMzYyMTIyOTdmYmZmYzM1YjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YTg0ZTUyMDA5NzU4NjcxZmExY2RiYjZlYjAxMjRkMTdjNTU4NWM5ZjAwMGEzMjQ5ZTc1MTIwNzRkMzI5NzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3YWViNWQ2ZjkyNzM5ODI0YmY3YWI1ZjRmMzkwNzc1MWZlYTkyOWM2OTU1MWNkYjYzMzk4NjdiMjIzNTk0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlMzM5Yjk0Mzk4YjE2ZmMxZjBhZTcyNDVjZjcwNmQ1ZjkyOGIzOWZlMDJmNmM3NzM0ZDBjMzliYjA1NmY0OWEifQ"
+          "resource": "repo://src/web.rs#L290-L358",
+          "version": "repo-lines-v1:sha256:8577903e6f767a7b6a52f380af46928a9675f437a6504d0f94f71582b9de44b0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0MGY2M2U2ZGVkNDhiMzBmMGNkYTQ1ZGZjZThjNGZkZjBjYzQ2OWEzMzU2Mzk5MjFkYTc3ZDYyMWE0ZjU3MjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YTg0ZTUyMDA5NzU4NjcxZmExY2RiYjZlYjAxMjRkMTdjNTU4NWM5ZjAwMGEzMjQ5ZTc1MTIwNzRkMzI5NzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0MjE1Mjc0YzliMTQxYTEwOTNkYTIxMzY5Y2ZkMjAzZTcyYTc1NDBkMTlkN2IzZDViYTg4ODEyZDU5Yzk4MmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlMzM5Yjk0Mzk4YjE2ZmMxZjBhZTcyNDVjZjcwNmQ1ZjkyOGIzOWZlMDJmNmM3NzM0ZDBjMzliYjA1NmY0OWEifQ"
         }
       ]
     },
@@ -68,15 +68,19 @@
     },
     {
       "id": "claim_8d6d33e9654b436aa8fca2f21050f51b",
-      "statement": "Appens konfiguration er BASE_URL, BIND og DATA_DIR; ingen SMTP-klient eller mailarbejder startes.",
+      "statement": "Appens konfiguration er BASE_URL, BIND, DATA_DIR og TRUST_PROXY; ingen SMTP-klient eller mailarbejder startes. TRUST_PROXY kræver loopback-bind og én gyldig privat klient-IP-header fra proxyen til loginbegrænsning.",
       "evidence": [
         {
           "resource": "repo://src/config.rs",
-          "version": "repo-file-v1:sha256:e7bc96486ce0aa221d33142ac57baf7829022a4ba125a60c6575cf2144de9f51"
+          "version": "repo-file-v1:sha256:145ff66b87a70b5e301df25d2ee3f8e8a2e86fe45e63bf1e0e457d92f64a8e6b"
         },
         {
           "resource": "repo://src/main.rs#L159-L193",
           "version": "repo-lines-v1:sha256:5d1ff55d8194a314e9175f0ac5069c362a0d29fd649a2c43fdd55ebc21d2706d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjMzM0NWQ3Y2IyMjg5NDc4MWRjYjE1NGYyYjA0N2MwNjdkOTU2NzVjMTExM2I2YzU0MWYwYzZkOTAzYWJkODgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwZjM1YTcyMzU2YTEwM2I5OTc5ZTg2ZDI3MDAzMzlkZjBlOTM2YTkxYWFlMTBlNzU4OTA0OGZmYTlkMjc5YzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/web.rs#L264-L294",
+          "version": "repo-lines-v1:sha256:7fbb072bd2669650d79e4931603801945ca2235c45807e7a96b016affd186cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlNWJjOGZkZjM3NjlkY2E5YjIwMjhiMDRmZWJlMjEyNjY1ZDc3YzJmNThhMjJlZDI4NWVhOTU4YjExZDNlMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5ODdmYzQ2YmIxYjUzMmM1MzZhNjc3NTc4OTg4Mzk1NzVjZWIwNjkyMjg0OTc4MmI2YzQzMzAxZjk1ZGMwMTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1YWNkN2U0ODU4Y2FjMzY4ZTljOGJiODQ4MmY4NGNiZmNlMmFlMTkzOWUxMTc1ZTIwZTA2OTIxMjVjMWM3NWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwNTBiMjUyNWI0MjczMzhjMzkyZjMxOWIwNWM1MjcxNGRkNjEzZDA5ZGRhODFhMGM5YWQ1MzgxNjVmNGE1MDcifQ"
         }
       ]
     },
@@ -99,7 +103,7 @@
           "version": "repo-lines-v1:sha256:bf88c3c348bfbad0b4a05f1ddbed4bdd376edb340ba03fcf96995aa50f7c0cbd:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkZjY2M2UwODRkNDIxZjFiYTdkNjg1M2E1ZWZmMDI0NTk3ZmU0OTAwNjEyNWE2NjdjZjBkZDU0Zjg3MDBlMjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVmYjljNzQ4MjA3MGI0YmQzMTYxZjMwOTU5NDFkNDgyMWVlOGJjMTYzNmEwMzZiYmU3YTIwM2UzODY1MWY5N2EiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE0ZWE3MTkzZDg3ZTQ5YWQwMmRhN2I4ZGJhODRmOWI1ZGVlMTAzZTMwOWU5N2MzOTMyNzJlYjE1MzQxOTVkNzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5YWU1ZDg4N2UzNmNjYjA3ODdkOGI5ZjE2MzI1OTVlNjFhNmU4ZGVjZmMyNDM0ODEzMjZmZmUyZGVlZGJiOWYifQ"
         },
         {
-          "resource": "repo://tests/workflow.rs#L981-L1057",
+          "resource": "repo://tests/workflow.rs#L982-L1058",
           "version": "repo-lines-v1:sha256:d2d659d7370198eae7ab152b7fffa9e8ade51006aa76edca91aa00ce132ee244:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwODNhZjNiOWQ0ZDMyZjY1MTk1ODhmNDFhMTE0NTNkYzQwMTg0ZGJmNDhjZmQ3OTliOWQ2ZDgyNTc1MmEwY2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjOGNhNTMxNDFjYjA0ZDFjMzM3Y2UwODI3MWIwZDU3ZTVjYWQ2MzkyNWM2NjI0MTljOTZhNjFmMzA4YTlhODgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NzJlOTI3NWNiNmEyNGZmYTg5NTJjY2E3N2U2YTRhNWEyYWRlNjNjZWQ0MzUxYzZiYzU4NjBhYWZlNTIyZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEifQ"
         }
       ]
@@ -145,7 +149,7 @@
           "version": "repo-file-v1:sha256:b4d5fabb7e3233a99cce4ff42e394d72b627b5bfc1317005970a0926ab595a7c"
         },
         {
-          "resource": "repo://tests/workflow.rs#L2001-L2048",
+          "resource": "repo://tests/workflow.rs#L2002-L2049",
           "version": "repo-lines-v1:sha256:c6dcb742579dc6c8275c5bcc4852a072803c7f927e6eba5e157da07afa405f4d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlMGYxN2I2MGY5MDAyYzc3ZWUwYmRhNDBmZjhjZjVjODg3OWRjMDQ4NjcwZGE0ZDFjZjlhYjRiZjY4YzRjMzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3NzJlOTI3NWNiNmEyNGZmYTg5NTJjY2E3N2U2YTRhNWEyYWRlNjNjZWQ0MzUxYzZiYzU4NjBhYWZlNTIyZDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE1MmUyYjI1M2MyNjJhMjY1NTU1YTQ0YzBjMDc1NTk4Y2FiMTcwZTk5Yjc3MTUyZjQyOWI0ZTA5Y2RkZDdhMGUifQ"
         }
       ]
@@ -163,10 +167,36 @@
           "version": "repo-file-v1:sha256:5fe1d8f9c042bb5824a0dbedea481264c6ddecb9d43a2af112a29d77673f59f2"
         }
       ]
+    },
+    {
+      "id": "claim_e913a045696347e592dcd9c3d01656d4",
+      "statement": "Produktionsopsætningen kører en separat systembruger med versionerede binære releases, lokal lytteport og Caddy foran. Daglig verificeret SQLite-backup med linknøgle krypteres til et separat NAS-repository; retention er syv lokale, 14 daglige, otte ugentlige og 12 månedlige snapshots.",
+      "evidence": [
+        {
+          "resource": "repo://deploy/caddy/SkrivUnder.Caddyfile",
+          "version": "repo-file-v1:sha256:a76807af4332059a4b6f58e7bd785180e0c4edd4559375e8c375305c55d1b68e"
+        },
+        {
+          "resource": "repo://deploy/systemd/skriv-under-backup.timer",
+          "version": "repo-file-v1:sha256:d868c8cb84827a2008d701c47afee77d1a682c5b4742ac903139b974d1dc2459"
+        },
+        {
+          "resource": "repo://deploy/systemd/skriv-under.service",
+          "version": "repo-file-v1:sha256:5473e0757d61b46112328f669b73f6d676fecff69168176a143e275c6755065a"
+        },
+        {
+          "resource": "repo://docs/production.md",
+          "version": "repo-file-v1:sha256:919469df16278567d965a6182ac009f5a79ced34c7f48163fd93f5ac2d7a615f"
+        },
+        {
+          "resource": "repo://scripts/backup-production.sh",
+          "version": "repo-file-v1:sha256:7769823a77597c50665f85dc35cf04bd24f56ea06bcc3558a2bbfd322db7b621"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-07T11:37:05.584Z"
+    "at": "2026-11-08T16:42:19.277Z"
   }
 }

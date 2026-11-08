@@ -1,0 +1,37 @@
+[Unit]
+Description=Skriv Under document signing
+After=network.target
+
+[Service]
+Type=simple
+User=skriv-under
+Group=skriv-under
+StateDirectory=skriv-under
+StateDirectoryMode=0700
+WorkingDirectory=/var/lib/skriv-under
+EnvironmentFile=/etc/skriv-under/production.env
+ExecStart=/opt/skriv-under/current/document-signing serve
+Restart=on-failure
+RestartSec=3
+KillSignal=SIGINT
+TimeoutStopSec=90
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+MemoryHigh=768M
+MemoryMax=1G
+CPUQuota=200%
+TasksMax=128
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

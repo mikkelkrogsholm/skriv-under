@@ -5,7 +5,7 @@ description: Start Skriv Under, vedligehold den eneste administratorkonto, besky
 tags: [operations, configuration, links, storage, rust]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-07T11:37:05.584Z
+    at: 2026-11-08T16:42:19.277Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
@@ -13,14 +13,24 @@ sources:
     resource: repo://.github/workflows/ci.yml
   - id: openwiki-source-651d1fb6c9e49916a916ab51
     resource: repo://Cargo.toml
+  - id: openwiki-source-024ebbcbb14be96ebf905d39
+    resource: repo://deploy/caddy/SkrivUnder.Caddyfile
   - id: openwiki-source-dbee0aeefb17a915f02e6e73
     resource: repo://deploy/systemd/document-signing-build-cache.service
   - id: openwiki-source-cd30c5dcd48ca4d1c0f6b7e5
     resource: repo://deploy/systemd/document-signing-build-cache.timer
+  - id: openwiki-source-7c0bfb7e4ab911badbcd3424
+    resource: repo://deploy/systemd/skriv-under-backup.timer
+  - id: openwiki-source-c7888eeba3ff0ecf2239cad6
+    resource: repo://deploy/systemd/skriv-under.service
   - id: openwiki-source-70991026f1538e8215a8789e
     resource: repo://docs/development.md
+  - id: openwiki-source-d5037beb9bfa41488c60312e
+    resource: repo://docs/production.md
   - id: openwiki-source-b7793decf9d7c9ba48e57e0f
     resource: repo://rust-toolchain.toml
+  - id: openwiki-source-e6df842e00830694a2fe45f0
+    resource: repo://scripts/backup-production.sh
   - id: openwiki-source-7c8eb8aa4e6191d12b8c0341
     resource: repo://scripts/check-build-cache.sh
   - id: openwiki-source-2a737474d86fc75cc9d9694f
@@ -39,7 +49,7 @@ sources:
     resource: repo://src/web.rs
   - id: openwiki-source-a4d0d6fea18ea7627c71affd
     resource: repo://tests/workflow.rs
-generated: { by: "codex", at: "2026-11-07T11:37:05.584Z" }
+generated: { by: "codex", at: "2026-11-08T16:42:19.277Z" }
 ---
 
 # Drift, links og buildplads
@@ -67,10 +77,11 @@ Appen sender ingen e-mails og kræver ingen SMTP-konfiguration. Administratoren 
 | `BASE_URL` | `http://127.0.0.1:3080`; oprindelsen til de links, du deler |
 | `BIND` | `127.0.0.1:3080`; serverens lytteadresse |
 | `DATA_DIR` | `var`; privat mappe til database og linknøgle |
+| `TRUST_PROXY` | `false`; aktivér kun bag lokal proxy, der overskriver klient-IP |
 
 `BASE_URL` normaliseres til en oprindelse; HTTPS giver Secure-cookies også ved store bogstaver i den indtastede adresse.
 
-Miljøvariabler læses ved opstart. `.env` indlæses ikke automatisk. Hvis filen bruges, eksporteres værdierne eksplicit før opstart. Ved offentlig drift skal `BASE_URL` bruge HTTPS, og en TLS-proxy skal stå foran appen. Undlad at logge cookies, formularindhold og stier med `/s/` eller `/d/`. Loginbegrænsningen bruger forbindelsens faktiske IP.
+Miljøvariabler læses ved opstart. `.env` indlæses ikke automatisk. Hvis filen bruges, eksporteres værdierne eksplicit før opstart. Ved offentlig drift skal `BASE_URL` bruge HTTPS, og en TLS-proxy skal stå foran appen. Undlad at logge cookies, formularindhold og stier med `/s/` eller `/d/`. Loginbegrænsningen bruger forbindelsens faktiske IP. Med `TRUST_PROXY=true` kræves loopback i `BIND`, og én gyldig `X-Skriv-Under-Client-IP` fra den lokale proxy bruges i stedet. Manglende, ugyldige eller gentagne værdier afvises; `X-Forwarded-For` ignoreres.
 
 ## AI-klienter og MCP
 
@@ -98,9 +109,17 @@ Opgradering fra e-mailversionen gør modtagerens historiske e-mailfelt valgfrit.
 
 SQLite med WAL gemmer dokumenter, PDF'er, underskrifter, sessioner, linkmetadata og revisionsspor i `DATA_DIR/documents.sqlite3`. En fil-lås tages før åbning eller migrering af databasen og hindrer to serverprocesser i samme datamappe. Vedligeholdelsesarbejderen kontrollerer udløb og sessionsoprydning hvert 10. sekund.
 
-Genstart sletter ikke signerede dokumenter. Brug SQLite-backup under drift frem for kun at kopiere hovedfilen, da nyere data kan ligge i WAL. Der er endnu ingen automatisk backup eller slettepolitik. [Integrationstestene](../../tests/workflow.rs) efterprøver både migration, manglende linknøgle og genkopiering efter genstart.
+Genstart sletter ikke signerede dokumenter. Brug SQLite-backup under drift frem for kun at kopiere hovedfilen, da nyere data kan ligge i WAL. Produktionsopsætningen har en daglig krypteret NAS-backup via systemd og restic; dokumenternes slettepolitik er endnu ikke implementeret. [Integrationstestene](../../tests/workflow.rs) efterprøver både migration, manglende linknøgle og genkopiering efter genstart.
 
 Se også [signeringsforløb og arkiv](../product/signering-og-arkiv.md) og implementeringen i [links](../../src/links.rs), [database](../../src/db.rs) og [opstart](../../src/main.rs).
+
+## Produktion
+
+Den offentlige installation er [skrivunder.mikkelkrogsholm.dk](https://skrivunder.mikkelkrogsholm.dk). Den kører som en separat systembruger med data i `/var/lib/skriv-under` og en versioneret binær under `/opt/skriv-under`. Caddy videresender til loopback og genindlæses ved konfigurationsændringer. Sitet undlader accesslogs og bruger generiske proxyfejl for at beskytte tokenlinks.
+
+`skriv-under-backup.timer` tager dagligt kl. 03:35–03:40 dansk tid en SQLite online-backup sammen med linknøglen. Snapshot kontrolleres og sendes krypteret til et særskilt restic-repository på NAS. De seneste syv lokale snapshots beholdes; NAS beholder 14 daglige, otte ugentlige og 12 månedlige snapshots. NAS-mountet skal være tilgængeligt, ellers fejler backupjobbet.
+
+Se [produktionsvejledningen](../../docs/production.md) for servicekommandoer, kontoændring, releases, backupnøgle og gendannelse.
 
 ## Buildplads og kontrol
 

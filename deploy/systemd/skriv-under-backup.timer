@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily Skriv Under backup
+
+[Timer]
+OnCalendar=*-*-* 03:35:00 Europe/Copenhagen
+Persistent=true
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target

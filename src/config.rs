@@ -5,14 +5,25 @@ pub struct Config {
     pub base_url: String,
     pub bind: String,
     pub data_dir: PathBuf,
+    pub trust_proxy: bool,
 }
 impl Config {
     pub fn load() -> Result<Self, Box<dyn std::error::Error>> {
         let base_url =
             normalize_origin(&env::var("BASE_URL").unwrap_or("http://127.0.0.1:3080".into()))?;
+        let bind = env::var("BIND").unwrap_or("127.0.0.1:3080".into());
+        let trust_proxy = match env::var("TRUST_PROXY").as_deref() {
+            Ok("true") => true,
+            Ok("false") | Err(_) => false,
+            _ => return Err("TRUST_PROXY must be true or false".into()),
+        };
+        if trust_proxy && !bind.parse::<std::net::SocketAddr>()?.ip().is_loopback() {
+            return Err("TRUST_PROXY requires a loopback BIND address".into());
+        }
         Ok(Self {
             base_url,
-            bind: env::var("BIND").unwrap_or("127.0.0.1:3080".into()),
+            bind,
+            trust_proxy,
             data_dir: env::var("DATA_DIR")
                 .map(PathBuf::from)
                 .unwrap_or("var".into()),
@@ -53,6 +64,7 @@ mod tests {
             base_url,
             bind: "127.0.0.1:0".into(),
             data_dir: "var".into(),
+            trust_proxy: false,
         };
         assert!(config.secure());
         assert_eq!(config.base_url, "https://example.com");

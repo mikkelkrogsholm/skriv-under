@@ -259,6 +259,21 @@ async fn login_page(State(app): S) -> Response {
     );
     r
 }
+// Caddy overwrites this private header with its actual TCP peer address.
+// Never trust client-supplied forwarding headers or non-loopback connections.
+fn login_client_ip(config: &Config, peer: SocketAddr, h: &HeaderMap) -> Result<std::net::IpAddr> {
+    if config.trust_proxy && peer.ip().is_loopback() {
+        if h.get_all("x-skriv-under-client-ip").iter().count() != 1 {
+            return Err(denied());
+        }
+        return h
+            .get("x-skriv-under-client-ip")
+            .and_then(|v| v.to_str().ok())
+            .and_then(|s| s.parse().ok())
+            .ok_or_else(denied);
+    }
+    Ok(peer.ip())
+}
 #[derive(Deserialize)]
 struct Login {
     email: String,
@@ -275,7 +290,7 @@ async fn login(
     if f.email.len() > 254 || f.password.len() > 1024 {
         return Err(bad("Ugyldigt login"));
     }
-    let ip = peer.ip().to_string();
+    let ip = login_client_ip(&app.config, peer, &h)?.to_string();
     let mut tx = app.pool.begin().await?;
     let count: i64 = sqlx::query_scalar("SELECT count(*) FROM login_attempts WHERE ip=? AND at>?")
         .bind(&ip)
@@ -1085,4 +1100,52 @@ async fn integrations(
     }
     body.push_str("</ol></section>");
     Ok(Html(page("AI / MCP", &body, Some(secret))))
+}
+
+#[cfg(test)]
+mod proxy_tests {
+    use super::*;
+    fn config(trust_proxy: bool) -> Config {
+        Config {
+            base_url: "https://skrivunder.example".into(),
+            bind: "127.0.0.1:3080".into(),
+            data_dir: "var".into(),
+            trust_proxy,
+        }
+    }
+    #[test]
+    fn proxy_client_ip_requires_explicit_trust_loopback_and_one_valid_header() {
+        let local = "127.0.0.1:1234".parse().unwrap();
+        let remote = "203.0.113.8:1234".parse().unwrap();
+        let mut h = HeaderMap::new();
+        h.insert("x-forwarded-for", HeaderValue::from_static("198.51.100.99"));
+        h.insert(
+            "x-skriv-under-client-ip",
+            HeaderValue::from_static("198.51.100.7"),
+        );
+        assert_eq!(
+            login_client_ip(&config(false), local, &h).ok(),
+            Some("127.0.0.1".parse().unwrap())
+        );
+        assert_eq!(
+            login_client_ip(&config(true), remote, &h).ok(),
+            Some("203.0.113.8".parse().unwrap())
+        );
+        assert_eq!(
+            login_client_ip(&config(true), local, &h).ok(),
+            Some("198.51.100.7".parse().unwrap())
+        );
+        h.append(
+            "x-skriv-under-client-ip",
+            HeaderValue::from_static("198.51.100.8"),
+        );
+        assert!(login_client_ip(&config(true), local, &h).is_err());
+        h.insert(
+            "x-skriv-under-client-ip",
+            HeaderValue::from_static("not-an-ip"),
+        );
+        assert!(login_client_ip(&config(true), local, &h).is_err());
+        h.remove("x-skriv-under-client-ip");
+        assert!(login_client_ip(&config(true), local, &h).is_err());
+    }
 }

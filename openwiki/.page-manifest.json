@@ -2,16 +2,18 @@
   "schemaVersion": 1,
   "pages": {
     "/openwiki/integrations/mcp.md": {
-      "sourceFingerprint": "sha256:e646126ad38c5c1591c5f964d789ac9401864fd19fcbaa695103d07d9ac445ec",
-      "pageVersion": "sha256:bf257f9880edbc6060ebe6711c3cab47790bbcef9526818afec23ee18d8eef13",
+      "pageVersion": "sha256:e4a640c0a72feedbe3c91a7b2ac512c7dbf63731e378a439ba331857ff584638",
       "completedBy": "codex",
-      "completedRunId": "9882d78c-71d7-4273-ad1d-6a512378dd16"
+      "completedRunId": "3eb33287-5a35-49e0-9091-a79f1f509140",
+      "gitHead": "194c96cea7d5c573de2674b65d1e8436f3b6b4f7",
+      "sourceFingerprint": "sha256:418e92fe1319bcd1f244ee1f4e0078a3aa146f94dc4ad31a835a91d55aa06292"
     },
     "/openwiki/operations/lokal-drift.md": {
-      "pageVersion": "sha256:b4060a61c76fc5e2fa45078c75b5f864893c362f11bc616a40d61722d915e0cf",
+      "pageVersion": "sha256:2c697ebeda4c7aaaa7a8defa17da92c0b9b0c4490f921e8457ed474857ddd465",
       "completedBy": "codex",
-      "completedRunId": "6fa0c783-05aa-43e6-80f7-540712c285e7",
-      "sourceFingerprint": "sha256:58351d369832a3c798438b7a341150a5967cb95b3c42933fb39387c14fa2fbf2"
+      "completedRunId": "3eb33287-5a35-49e0-9091-a79f1f509140",
+      "gitHead": "194c96cea7d5c573de2674b65d1e8436f3b6b4f7",
+      "sourceFingerprint": "sha256:418e92fe1319bcd1f244ee1f4e0078a3aa146f94dc4ad31a835a91d55aa06292"
     },
     "/openwiki/product/signering-og-arkiv.md": {
       "sourceFingerprint": "sha256:e646126ad38c5c1591c5f964d789ac9401864fd19fcbaa695103d07d9ac445ec",
@@ -20,10 +22,11 @@
       "completedRunId": "9882d78c-71d7-4273-ad1d-6a512378dd16"
     },
     "/openwiki/quickstart.md": {
-      "pageVersion": "sha256:3a02f492e471a6bd21b04c0e4a2af9a5239dc51e87a19c0b727f0c25699bcc9c",
+      "pageVersion": "sha256:5db27fec43915246f6620c0499f016b49e3d1bdf65b2f70cfed7045e13d7f6b0",
       "completedBy": "codex",
-      "completedRunId": "6fa0c783-05aa-43e6-80f7-540712c285e7",
-      "sourceFingerprint": "sha256:58351d369832a3c798438b7a341150a5967cb95b3c42933fb39387c14fa2fbf2"
+      "completedRunId": "3eb33287-5a35-49e0-9091-a79f1f509140",
+      "gitHead": "194c96cea7d5c573de2674b65d1e8436f3b6b4f7",
+      "sourceFingerprint": "sha256:418e92fe1319bcd1f244ee1f4e0078a3aa146f94dc4ad31a835a91d55aa06292"
     }
   }
 }

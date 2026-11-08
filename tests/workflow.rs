@@ -86,6 +86,7 @@ async fn setup() -> TestApp {
         base_url: "http://127.0.0.1:3080".into(),
         bind: "127.0.0.1:0".into(),
         data_dir: dir.path().join("data"),
+        trust_proxy: false,
     };
     let pool = db::open(&config).await.unwrap();
     use argon2::{Argon2, PasswordHasher, password_hash::SaltString};
@@ -2279,4 +2280,67 @@ async fn adversarial_recipient_and_admin_token_roles_are_not_interchangeable() {
         .status,
         StatusCode::FORBIDDEN
     );
+}
+
+#[tokio::test]
+async fn trusted_proxy_login_limits_actual_clients_independently() {
+    let t = setup().await;
+    let mut config = t.app.config.clone();
+    config.trust_proxy = true;
+    let router = web::router(Arc::new(App {
+        pool: t.app.pool.clone(),
+        link_key: t.app.link_key,
+        config,
+    }));
+    async fn login(router: &Router, ip: &str, password: &str) -> StatusCode {
+        let nonce = db::token();
+        let payload = form(&[
+            ("email", "owner@example.com"),
+            ("password", password),
+            ("csrf", &db::csrf(&nonce)),
+        ]);
+        let mut req = Request::builder()
+            .method("POST")
+            .uri("/login")
+            .header("content-type", "application/x-www-form-urlencoded")
+            .header("cookie", format!("login_nonce={nonce}"))
+            .header("x-skriv-under-client-ip", ip)
+            .body(Body::from(payload))
+            .unwrap();
+        req.extensions_mut()
+            .insert(ConnectInfo("127.0.0.1:1234".parse::<SocketAddr>().unwrap()));
+        router.clone().oneshot(req).await.unwrap().status()
+    }
+    for _ in 0..10 {
+        assert_eq!(
+            login(&router, "198.51.100.10", "wrong-password").await,
+            StatusCode::UNAUTHORIZED
+        );
+    }
+    assert_eq!(
+        login(&router, "198.51.100.10", "test-password-123").await,
+        StatusCode::TOO_MANY_REQUESTS
+    );
+    assert_eq!(
+        login(&router, "198.51.100.11", "test-password-123").await,
+        StatusCode::SEE_OTHER
+    );
+}
+
+#[test]
+fn trusted_proxy_configuration_rejects_public_bind_and_invalid_flags_before_creating_data() {
+    for (bind, trust) in [("0.0.0.0:3080", "true"), ("127.0.0.1:3080", "yes")] {
+        let dir = tempfile::tempdir().unwrap();
+        let data = dir.path().join("data");
+        let output = std::process::Command::new(env!("CARGO_BIN_EXE_document-signing"))
+            .env("BASE_URL", "https://skrivunder.example")
+            .env("BIND", bind)
+            .env("TRUST_PROXY", trust)
+            .env("DATA_DIR", &data)
+            .arg("serve")
+            .output()
+            .unwrap();
+        assert!(!output.status.success());
+        assert!(!data.exists());
+    }
 }

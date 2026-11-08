@@ -5,10 +5,12 @@ description: Skriv Under har én administrator, manuelt delte links, procesoverb
 tags: [quickstart, product, signing, access-control]
 verified:
   - by: openwiki/0.9.0
-    at: 2026-11-07T11:37:05.584Z
+    at: 2026-11-08T16:42:19.277Z
 sources:
   - id: openwiki-source-4905fab56ecf9fa5e1ebbf3f
     resource: repo://.cargo/config.toml
+  - id: openwiki-source-d5037beb9bfa41488c60312e
+    resource: repo://docs/production.md
   - id: openwiki-source-abe5fae4c5d81d8288df4316
     resource: repo://examples/receipt_preview.rs
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
@@ -31,12 +33,14 @@ sources:
     resource: repo://src/schema.sql
   - id: openwiki-source-7b75006986d8b0337adc6ca0
     resource: repo://src/web.rs
-generated: { by: "codex", at: "2026-11-07T11:37:05.584Z" }
+generated: { by: "codex", at: "2026-11-08T16:42:19.277Z" }
 ---
 
 # Skriv Under
 
 **Skriv Under** er et dansk dokumentsigneringssystem. Ejeren uploader en PDF, opretter personlige links til manuel deling, følger underskrifterne og finder den færdige aftale i sit signerede arkiv.
+
+Den offentlige installation ligger på [skrivunder.mikkelkrogsholm.dk](https://skrivunder.mikkelkrogsholm.dk). Se [produktionsvejledningen](../docs/production.md) for drift, backup og gendannelse.
 
 ## Hvem bruger hvad?
 

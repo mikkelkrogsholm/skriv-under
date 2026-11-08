@@ -1,0 +1,15 @@
+[Unit]
+Description=Back up Skriv Under SQLite and link key to encrypted NAS repository
+After=skriv-under.service network-online.target
+Wants=network-online.target
+RequiresMountsFor=/home/admin/NAS
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/skriv-under-backup
+UMask=0077
+Nice=15
+IOSchedulingClass=idle
+CPUQuota=50%
+MemoryMax=512M
+TimeoutStartSec=20min

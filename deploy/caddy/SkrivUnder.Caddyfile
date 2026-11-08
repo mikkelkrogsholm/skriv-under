@@ -1,0 +1,23 @@
+skrivunder.mikkelkrogsholm.dk {
+	header X-Robots-Tag "noindex, nofollow, noarchive"
+	header Strict-Transport-Security "max-age=31536000"
+	# Bearer links must not appear in access logs.
+	log_skip
+	request_body {
+		max_size 32MB
+	}
+	reverse_proxy 127.0.0.1:3080 {
+		# Always replace any client-supplied value; the application trusts loopback only.
+		header_up X-Skriv-Under-Client-IP {remote_host}
+		transport http {
+			dial_timeout 3s
+			response_header_timeout 90s
+		}
+	}
+	# Handle failures locally, avoiding Caddy's request-bearing error log at INFO.
+	# Do not enable debug request logging for this service.
+	handle_errors {
+		header Cache-Control "no-store"
+		respond "Skriv Under er midlertidigt utilgaengelig. Proev igen om lidt." {err.status_code}
+	}
+}

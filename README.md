@@ -7,6 +7,9 @@ underskriver med navn og aktivt samtykke uden at oprette en konto.
 Skriv Under har **én administrator**. Din valgte AI-klient kan få samme
 administratoradgang gennem MCP med tokens, du selv opretter og tilbagekalder.
 
+Produktion: [skrivunder.mikkelkrogsholm.dk](https://skrivunder.mikkelkrogsholm.dk).
+Se [produktionsvejledningen](docs/production.md) for installation, backup og gendannelse.
+
 ## Funktioner
 
 - PDF-upload med 1–20 underskrivere og frist på 7, 14 eller 30 dage.
@@ -63,6 +66,7 @@ Det fulde token vises kun ved oprettelsen.
 | Indstilling | Værdi |
 | --- | --- |
 | Transport | Streamable HTTP |
+| Serveradresse i produktion | `https://skrivunder.mikkelkrogsholm.dk/mcp` |
 | Serveradresse lokalt | `http://127.0.0.1:3080/mcp` |
 | Header | `Authorization: Bearer DIT_TOKEN` |
 
@@ -82,6 +86,7 @@ PDF-upload/download og tokenlivscyklus.
 | `BASE_URL` | `http://127.0.0.1:3080` | Oprindelsen til de links, du deler |
 | `BIND` | `127.0.0.1:3080` | Serverens lytteadresse |
 | `DATA_DIR` | `var` | Privat mappe til SQLite, dokumenter og linknøgle |
+| `TRUST_PROXY` | `false` | Stol på én `X-Skriv-Under-Client-IP` fra en lokal proxy; kræver loopback i `BIND` |
 
 Se [.env.example](.env.example). Appen indlæser ikke `.env` automatisk;
 eksportér miljøvariablerne før opstart. `DATA_DIR` regnes fra arbejdsbiblioteket,
@@ -97,7 +102,12 @@ Brug SQLite-backup under drift, da nyere data kan ligge i WAL. En manglende elle
 forkert linknøgle kan gøre eksisterende links ubrugelige; appen kontrollerer
 sammenhængen ved opstart. Runtime-data og credentials er udelukket fra Git.
 
-Kør én serverproces pr. datamappe. Automatisk backup, slettepolitik og
+Med `TRUST_PROXY=true` skal proxyen overskrive `X-Skriv-Under-Client-IP` med
+forbindelsens faktiske klient-IP. Loginbegrænsningen bruger denne adresse;
+manglende eller ugyldige værdier afvises. `X-Forwarded-For` bruges ikke.
+
+Kør én serverproces pr. datamappe. Produktionsopsætningen indeholder en daglig
+krypteret NAS-backup via systemd og restic. Dokumenternes slettepolitik og
 webbaseret nulstilling af adgangskoder er endnu ikke implementeret.
 Se [driftsvejledningen](openwiki/operations/lokal-drift.md).
 
