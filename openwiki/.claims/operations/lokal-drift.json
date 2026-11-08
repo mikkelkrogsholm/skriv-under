@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f625ef332977cf2825d0d67380d70bd2eb8d859c2323ad6b1edd357bcdbae997",
+  "pageVersion": "sha256:475976cc068fe639b2ed23d3875c2179b411f638a7ae3a3a88fcc86b64b8fa8f",
   "claims": [
     {
       "id": "claim_8addc60e20d349c8b64ae2141d9ea387",
@@ -11,7 +11,7 @@
           "version": "repo-lines-v1:sha256:47e655d1f0ab3ab1e13500dabc425d60565454a32307afd96678b3d9c71381ee:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTgwOWRlZmRkODdkZTEzZjcxMDE2MTNjZTc4MGIyMjg0MzdiMTRhNzNiNTY5MTc5NjNmMTM1N2QyMDkyOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4ODdmNjVjMTM1YTJiNDcyY2M5OWFjMjNlYzNiYzAwMWM3MjhhOWQ1NWFiODUwY2VkZjFhODlmMjZlOWNlOTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE5MDFhYjFkMjEyMTE3Mzc3YjhmYTFmODE4MGJlYzVkZDZmZDEzZGQzYmIxMjI5ODhjNTQxYzEyZWNmYWVlYzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNTA2NzMyNDkwZDhiYjhhOWI4Y2IyMzU0ZjZkZTFjZTQ1MmRmMzNhNmQzYTM2ZTRiNDVjZGM1NDdmYWYxZTAifQ"
         },
         {
-          "resource": "repo://src/web.rs#L338-L406",
+          "resource": "repo://src/web.rs#L340-L408",
           "version": "repo-lines-v1:sha256:8577903e6f767a7b6a52f380af46928a9675f437a6504d0f94f71582b9de44b0:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI0MGY2M2U2ZGVkNDhiMzBmMGNkYTQ1ZGZjZThjNGZkZjBjYzQ2OWEzMzU2Mzk5MjFkYTc3ZDYyMWE0ZjU3MjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA3YTg0ZTUyMDA5NzU4NjcxZmExY2RiYjZlYjAxMjRkMTdjNTU4NWM5ZjAwMGEzMjQ5ZTc1MTIwNzRkMzI5NzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0MjE1Mjc0YzliMTQxYTEwOTNkYTIxMzY5Y2ZkMjAzZTcyYTc1NDBkMTlkN2IzZDViYTg4ODEyZDU5Yzk4MmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlMzM5Yjk0Mzk4YjE2ZmMxZjBhZTcyNDVjZjcwNmQ1ZjkyOGIzOWZlMDJmNmM3NzM0ZDBjMzliYjA1NmY0OWEifQ"
         }
       ]
@@ -79,7 +79,7 @@
           "version": "repo-lines-v1:sha256:5d1ff55d8194a314e9175f0ac5069c362a0d29fd649a2c43fdd55ebc21d2706d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhjMzM0NWQ3Y2IyMjg5NDc4MWRjYjE1NGYyYjA0N2MwNjdkOTU2NzVjMTExM2I2YzU0MWYwYzZkOTAzYWJkODgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwZjM1YTcyMzU2YTEwM2I5OTc5ZTg2ZDI3MDAzMzlkZjBlOTM2YTkxYWFlMTBlNzU4OTA0OGZmYTlkMjc5YzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/web.rs#L312-L342",
+          "resource": "repo://src/web.rs#L314-L344",
           "version": "repo-lines-v1:sha256:7fbb072bd2669650d79e4931603801945ca2235c45807e7a96b016affd186cc7:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlNWJjOGZkZjM3NjlkY2E5YjIwMjhiMDRmZWJlMjEyNjY1ZDc3YzJmNThhMjJlZDI4NWVhOTU4YjExZDNlMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5ODdmYzQ2YmIxYjUzMmM1MzZhNjc3NTc4OTg4Mzk1NzVjZWIwNjkyMjg0OTc4MmI2YzQzMzAxZjk1ZGMwMTUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE1YWNkN2U0ODU4Y2FjMzY4ZTljOGJiODQ4MmY4NGNiZmNlMmFlMTkzOWUxMTc1ZTIwZTA2OTIxMjVjMWM3NWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwNTBiMjUyNWI0MjczMzhjMzkyZjMxOWIwNWM1MjcxNGRkNjEzZDA5ZGRhODFhMGM5YWQ1MzgxNjVmNGE1MDcifQ"
         }
       ]
@@ -132,7 +132,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -150,7 +150,7 @@
         },
         {
           "resource": "repo://tests/workflow.rs",
-          "version": "repo-file-v1:sha256:7851cf840b8f86728ad9b0901aa51d6b77d19b8db35cde6aca7545512e02e676"
+          "version": "repo-file-v1:sha256:326c4839f9f0748648454e1ca36c4df58c207902b837baee25f3e7957f04af96"
         }
       ]
     },
@@ -215,6 +215,6 @@
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:04:33.376Z"
+    "at": "2026-11-08T20:07:50.530Z"
   }
 }

@@ -2613,3 +2613,47 @@ async fn mcp_package_has_upload_manifest_originals_and_validation_parity() {
         1
     );
 }
+
+#[tokio::test]
+async fn pdf_reader_assets_have_correct_types_and_only_expose_bundled_files() {
+    let t = setup().await;
+    for (path, mime) in [
+        ("/assets/pdf-reader.js", "text/javascript; charset=utf-8"),
+        ("/assets/pdfjs/pdf.mjs", "text/javascript; charset=utf-8"),
+        (
+            "/assets/pdfjs/pdf.worker.mjs",
+            "text/javascript; charset=utf-8",
+        ),
+        ("/assets/pdfjs/wasm/openjpeg.wasm", "application/wasm"),
+        (
+            "/assets/pdfjs/wasm/openjpeg_nowasm_fallback.js",
+            "text/javascript; charset=utf-8",
+        ),
+        (
+            "/assets/pdfjs/standard_fonts/LiberationSans-Regular.ttf",
+            "application/octet-stream",
+        ),
+    ] {
+        let response = t
+            .router
+            .clone()
+            .oneshot(Request::builder().uri(path).body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::OK, "{path}");
+        assert_eq!(response.headers()["content-type"], mime, "{path}");
+    }
+    assert_eq!(
+        request(
+            &t.router,
+            "GET",
+            "/assets/pdfjs/wasm/link-key",
+            None,
+            vec![],
+            ""
+        )
+        .await
+        .status,
+        StatusCode::NOT_FOUND
+    );
+}

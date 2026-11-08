@@ -210,6 +210,8 @@ pub fn router(app: Arc<App>) -> Router {
                             header::CONTENT_TYPE,
                             if name.ends_with(".wasm") {
                                 "application/wasm"
+                            } else if name.ends_with(".js") {
+                                "text/javascript; charset=utf-8"
                             } else {
                                 "application/octet-stream"
                             },

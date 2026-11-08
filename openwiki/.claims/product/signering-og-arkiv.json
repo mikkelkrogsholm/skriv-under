@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:463e970a3baccf0632df4e6ee3403e3099f0fd071ef8c482009ee8ca80b79a56",
+  "pageVersion": "sha256:5b903309d4a133d926bd6f9fe0e40ed71f1593b4e4f2fe4f3e338dcd11dd05f7",
   "claims": [
     {
       "id": "claim_22ca9de739534f29a56285534c46d921",
@@ -16,7 +16,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -29,7 +29,7 @@
           "version": "repo-lines-v1:sha256:932823b176b000e74b1d3f3ba39eca0fb4d648f78e18b64dce7efe0e3d6c5cee:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkODQwNDJiY2Q2YmRlMmE0OWRhZTE4MjIyMjMyN2Q3YjU3N2RhMjEyMWI3NzY4ZTU2ODk2ZWYzYzE1N2Y4YTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM1ZjZmNDY2ZTU5Y2ZjMzA3MDNjNDVmNzJhZjY1ZGU1NGFjMzYzZDM1NGNjMWEzMzMwMzUwYWNkNDUyNDM0YzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://src/web.rs#L846-L872",
+          "resource": "repo://src/web.rs#L848-L874",
           "version": "repo-lines-v1:sha256:a14b4b0f16b2b8b13ed9130e5272eba8c74a224e297d7cc89f4165a047d60c5f:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjODFhOTVlODFjZWQ3MWY5ODI5ZGIxZDljYmJiN2JlNTNmNzUwOGM1MmZiOTViYjg3ODk4MjZkM2MyYjI4MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZkY2JlNjg1MDMzZGNhOWY3NzBmMmM1OTRlYjRiZGNlNGJjN2RmNjQzZmZiZjRmZjFmNWQyMGU4MjI4ZjFhYjQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3N2UzMTBlMTE5ZTJmMDM3ZTRkNTFlZWNmOTg3ODI2ZjNjZWY0ZTcwODZjMjIyYjkyMmVlMDVjZTFlNGViMGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzYmI4YzE0ZjA0NTdhY2U4NzkyZDAxYzBmZDBhODZjYjAyM2E0ZDFkYjE3ZTliMmM3MmM2NGU2ZGZjZTYwZWMifQ"
         }
       ]
@@ -54,7 +54,7 @@
       "evidence": [
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -68,7 +68,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -90,7 +90,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -114,7 +114,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -132,7 +132,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -174,7 +174,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         }
       ]
     },
@@ -196,11 +196,11 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         },
         {
           "resource": "repo://tests/workflow.rs",
-          "version": "repo-file-v1:sha256:7851cf840b8f86728ad9b0901aa51d6b77d19b8db35cde6aca7545512e02e676"
+          "version": "repo-file-v1:sha256:326c4839f9f0748648454e1ca36c4df58c207902b837baee25f3e7957f04af96"
         }
       ]
     },
@@ -214,7 +214,7 @@
         },
         {
           "resource": "repo://src/web.rs",
-          "version": "repo-file-v1:sha256:75acf2a2abd42e7efd5fee9038c7aafa530ee8c1f205232ff1e41d8f8fb6e31d"
+          "version": "repo-file-v1:sha256:200ba004afc44f688b41757721220f30aff340af5d1ff3bd6530653e530b93f9"
         },
         {
           "resource": "repo://vendor/pdfjs/README.md",
@@ -225,6 +225,6 @@
   ],
   "verification": {
     "by": "openwiki/0.9.0",
-    "at": "2026-11-08T20:04:33.376Z"
+    "at": "2026-11-08T20:07:50.530Z"
   }
 }
